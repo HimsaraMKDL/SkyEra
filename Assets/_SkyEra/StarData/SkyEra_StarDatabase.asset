@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453f6256790aed0448e98592cb6b68b4, type: 3}
+  m_Name: SkyEra_StarDatabase
+  m_EditorClassIdentifier: 
+  datasets:
+  - eraName: Ancient Sri Lanka
+    stars:
+    - starName: Sirius
+      rightAscension: 0
+      declination: 0
+      altitude: 45
+      azimuth: 90
+      magnitude: -1.46
+      size: 1.5
+    - starName: Faint_Test
+      rightAscension: 0
+      declination: 0
+      altitude: 35
+      azimuth: 150
+      magnitude: 2
+      size: 1
+    - starName: Star_C
+      rightAscension: 0
+      declination: 0
+      altitude: 55
+      azimuth: 220
+      magnitude: 1
+      size: 1
+    - starName: Star_D
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 0.8
+    - starName: Star_E
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1
+  - eraName: Historical Sri Lanka
+    stars:
+    - starName: Star_A
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1
+    - starName: Star_B
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1.2
+    - starName: Star_C
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1
+    - starName: Star_D
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 0.8
+    - starName: Star_E
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1
+  - eraName: Modern Sri Lanka
+    stars:
+    - starName: Star_A
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1
+    - starName: Star_B
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1.2
+    - starName: Star_C
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1
+    - starName: Star_D
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 0.8
+    - starName: Star_E
+      rightAscension: 0
+      declination: 0
+      altitude: 0
+      azimuth: 0
+      magnitude: 0
+      size: 1
