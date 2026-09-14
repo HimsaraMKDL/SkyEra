@@ -16,8 +16,8 @@ MonoBehaviour:
   - eraName: Ancient Sri Lanka
     stars:
     - starName: Sirius
-      rightAscension: 0
-      declination: 0
+      rightAscension: 6.7525
+      declination: -16.7161
       altitude: 45
       azimuth: 90
       magnitude: -1.46
@@ -89,12 +89,12 @@ MonoBehaviour:
       size: 1
   - eraName: Modern Sri Lanka
     stars:
-    - starName: Star_A
-      rightAscension: 0
-      declination: 0
-      altitude: 0
-      azimuth: 0
-      magnitude: 0
+    - starName: Aldebaran
+      rightAscension: 68.9849
+      declination: 16.5081
+      altitude: 80.1962
+      azimuth: 10.831
+      magnitude: 0.86
       size: 1
     - starName: Star_B
       rightAscension: 0

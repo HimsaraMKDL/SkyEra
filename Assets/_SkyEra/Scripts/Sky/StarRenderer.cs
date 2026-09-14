@@ -15,6 +15,7 @@ public class StarRenderer : MonoBehaviour
     public RectTransform starLayer;
 
     public SkyCoordinateConverter coordinateConverter;
+    public AstronomyCalculator astronomyCalculator;
 
 
     public Dictionary<string, Transform> spawnedStars =
@@ -206,12 +207,17 @@ public class StarRenderer : MonoBehaviour
         }
 
 
-        Vector2 position =
-            coordinateConverter.ConvertToScreenPosition(
-                data.altitude,
-                data.azimuth,
-                skyViewArea
-            );
+        Vector2 altAz = astronomyCalculator.CalculateAltAz(
+    data.rightAscension,
+    data.declination
+);
+
+
+        Vector2 position = coordinateConverter.ConvertToScreenPosition(
+            altAz.x,
+            altAz.y,
+            skyViewArea
+        );
 
 
         rect.anchoredPosition =
