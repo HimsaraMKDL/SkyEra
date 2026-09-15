@@ -8,29 +8,25 @@ public class StarRenderer : MonoBehaviour
     public StarDatabase starDatabase;
     public GameObject starPrefab;
 
-    // Used for sky dimensions / coordinate conversion
     public RectTransform skyViewArea;
-
-    // Stars are now spawned here
     public RectTransform starLayer;
 
     public SkyCoordinateConverter coordinateConverter;
     public AstronomyCalculator astronomyCalculator;
 
-
     public Dictionary<string, Transform> spawnedStars =
-        new Dictionary<string, Transform>(
-            StringComparer.OrdinalIgnoreCase
-        );
-
+        new Dictionary<string, Transform>(StringComparer.OrdinalIgnoreCase);
 
     public event Action<int> StarsRendered;
-
 
     private int selectedEra = 0;
 
     public int CurrentEraIndex => selectedEra;
 
+
+    // ---------------------------------------------------------
+    // CHANGE ERA
+    // ---------------------------------------------------------
 
     public void ChangeEra(int eraIndex)
     {
@@ -45,22 +41,23 @@ public class StarRenderer : MonoBehaviour
             return;
         }
 
-
         selectedEra = Mathf.Clamp(
             eraIndex,
             0,
             starDatabase.datasets.Length - 1
         );
 
-
         RenderStars();
     }
 
 
+    // ---------------------------------------------------------
+    // RENDER STARS
+    // ---------------------------------------------------------
+
     public void RenderStars()
     {
         ClearStars();
-
 
         if (starDatabase == null)
         {
@@ -71,7 +68,6 @@ public class StarRenderer : MonoBehaviour
             return;
         }
 
-
         if (starPrefab == null)
         {
             Debug.LogError(
@@ -80,7 +76,6 @@ public class StarRenderer : MonoBehaviour
 
             return;
         }
-
 
         if (skyViewArea == null)
         {
@@ -91,7 +86,6 @@ public class StarRenderer : MonoBehaviour
             return;
         }
 
-
         if (starLayer == null)
         {
             Debug.LogError(
@@ -100,7 +94,6 @@ public class StarRenderer : MonoBehaviour
 
             return;
         }
-
 
         if (coordinateConverter == null)
         {
@@ -111,29 +104,35 @@ public class StarRenderer : MonoBehaviour
             return;
         }
 
-
-        if (selectedEra < 0 ||
-            selectedEra >= starDatabase.datasets.Length)
+        if (astronomyCalculator == null)
         {
             Debug.LogError(
-                "StarRenderer: Invalid era index: " +
-                selectedEra
+                "StarRenderer: Astronomy Calculator Missing."
             );
 
             return;
         }
 
+        if (selectedEra < 0 ||
+            selectedEra >= starDatabase.datasets.Length)
+        {
+            Debug.LogError(
+                "StarRenderer: Invalid era index: "
+                + selectedEra
+            );
+
+            return;
+        }
 
         StarDataset currentDataset =
             starDatabase.datasets[selectedEra];
-
 
         if (currentDataset == null ||
             currentDataset.stars == null)
         {
             Debug.LogWarning(
-                "StarRenderer: No stars found for era " +
-                selectedEra
+                "StarRenderer: No stars found for era "
+                + selectedEra
             );
 
             StarsRendered?.Invoke(selectedEra);
@@ -142,6 +141,7 @@ public class StarRenderer : MonoBehaviour
         }
 
 
+        // Create every star in the selected era
         foreach (StarData star in currentDataset.stars)
         {
             CreateStar(star);
@@ -149,16 +149,20 @@ public class StarRenderer : MonoBehaviour
 
 
         Debug.Log(
-            "StarRenderer: Rendered " +
-            spawnedStars.Count +
-            " stars for era " +
-            selectedEra
+            "StarRenderer: Rendered "
+            + spawnedStars.Count
+            + " stars for era "
+            + selectedEra
         );
 
 
         StarsRendered?.Invoke(selectedEra);
     }
 
+
+    // ---------------------------------------------------------
+    // CREATE STAR
+    // ---------------------------------------------------------
 
     private void CreateStar(StarData data)
     {
@@ -179,6 +183,10 @@ public class StarRenderer : MonoBehaviour
             return;
         }
 
+
+        // -----------------------------------------------------
+        // CREATE STAR GAME OBJECT
+        // -----------------------------------------------------
 
         GameObject starObject =
             Instantiate(
@@ -207,22 +215,43 @@ public class StarRenderer : MonoBehaviour
         }
 
 
-        Vector2 altAz = astronomyCalculator.CalculateAltAz(
-    data.rightAscension,
-    data.declination
-);
+        // -----------------------------------------------------
+        // REAL ASTRONOMY CALCULATION
+        // -----------------------------------------------------
+
+        Vector2 altAz =
+            astronomyCalculator.CalculateAltAz(
+                data.rightAscension,
+                data.declination
+            );
 
 
-        Vector2 position = coordinateConverter.ConvertToScreenPosition(
-            altAz.x,
-            altAz.y,
-            skyViewArea
-        );
+        float calculatedAltitude =
+            altAz.x;
+
+        float calculatedAzimuth =
+            altAz.y;
+
+
+        // -----------------------------------------------------
+        // CONVERT ASTRONOMICAL POSITION TO UNITY POSITION
+        // -----------------------------------------------------
+
+        Vector2 screenPosition =
+            coordinateConverter.ConvertToScreenPosition(
+                calculatedAltitude,
+                calculatedAzimuth,
+                skyViewArea
+            );
 
 
         rect.anchoredPosition =
-            position;
+            screenPosition;
 
+
+        // -----------------------------------------------------
+        // STAR VISUAL SETUP
+        // -----------------------------------------------------
 
         StarView view =
             starObject.GetComponent<StarView>();
@@ -234,6 +263,10 @@ public class StarRenderer : MonoBehaviour
         }
 
 
+        // -----------------------------------------------------
+        // REGISTER STAR
+        // -----------------------------------------------------
+
         if (!spawnedStars.ContainsKey(cleanStarName))
         {
             spawnedStars.Add(
@@ -244,13 +277,39 @@ public class StarRenderer : MonoBehaviour
         else
         {
             Debug.LogWarning(
-                "StarRenderer: Duplicate star name: [" +
-                cleanStarName +
-                "]"
+                "StarRenderer: Duplicate star name: ["
+                + cleanStarName
+                + "]"
             );
         }
+
+
+        // -----------------------------------------------------
+        // DEBUG INFORMATION
+        // -----------------------------------------------------
+
+        Debug.Log(
+            "StarRenderer: "
+            + cleanStarName
+            + " | RA: "
+            + data.rightAscension.ToString("F4")
+            + "h"
+            + " | Dec: "
+            + data.declination.ToString("F4")
+            + "°"
+            + " | Alt: "
+            + calculatedAltitude.ToString("F2")
+            + "°"
+            + " | Az: "
+            + calculatedAzimuth.ToString("F2")
+            + "°"
+        );
     }
 
+
+    // ---------------------------------------------------------
+    // NORMALIZE STAR NAME
+    // ---------------------------------------------------------
 
     public static string NormalizeStarName(string value)
     {
@@ -260,6 +319,10 @@ public class StarRenderer : MonoBehaviour
         return value.Trim();
     }
 
+
+    // ---------------------------------------------------------
+    // CLEAR STARS
+    // ---------------------------------------------------------
 
     private void ClearStars()
     {
@@ -275,7 +338,6 @@ public class StarRenderer : MonoBehaviour
                 );
             }
         }
-
 
         spawnedStars.Clear();
     }
