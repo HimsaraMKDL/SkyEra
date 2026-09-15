@@ -1120,6 +1120,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531959564}
   m_CullTransparentMesh: 1
+--- !u!1 &547491179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547491180}
+  - component: {fileID: 547491181}
+  m_Layer: 0
+  m_Name: AstronomyCalculator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &547491180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547491179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1891159981}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547491181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547491179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c13aced91a7f1429070d5c360aab3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latitude: 6.9271
+  longitude: 79.8612
 --- !u!1 &583227606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,6 +2178,7 @@ MonoBehaviour:
   skyViewArea: {fileID: 1527327278}
   starLayer: {fileID: 865815033}
   coordinateConverter: {fileID: 632392206}
+  astronomyCalculator: {fileID: 547491181}
 --- !u!4 &900541712
 Transform:
   m_ObjectHideFlags: 0
@@ -3945,6 +3992,7 @@ Transform:
   m_Children:
   - {fileID: 450562702}
   - {fileID: 1210921329}
+  - {fileID: 547491180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2033917652
