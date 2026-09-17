@@ -3,3 +3,7 @@ Temp/
 Logs/
 obj/
 .vs/
+
+# Local IDE files
+.vscode/
+.idea/
