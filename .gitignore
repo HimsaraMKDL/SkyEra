@@ -7,3 +7,6 @@ obj/
 # Local IDE files
 .vscode/
 .idea/
+
+# Unity local search cache
+UserSettings/Search.index
