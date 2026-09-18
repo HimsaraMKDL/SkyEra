@@ -8,13 +8,16 @@ public class ConstellationRenderer : MonoBehaviour
     public ConstellationData constellationData;
     public StarRenderer starRenderer;
 
-    // Constellation lines will be created here
+    [Header("Layer")]
     public RectTransform constellationLayer;
-
 
     private readonly List<GameObject> lineObjects =
         new List<GameObject>();
 
+
+    // =========================================================
+    // ENABLE
+    // =========================================================
 
     private void OnEnable()
     {
@@ -25,6 +28,10 @@ public class ConstellationRenderer : MonoBehaviour
         }
     }
 
+
+    // =========================================================
+    // START
+    // =========================================================
 
     private void Start()
     {
@@ -48,6 +55,10 @@ public class ConstellationRenderer : MonoBehaviour
     }
 
 
+    // =========================================================
+    // DISABLE
+    // =========================================================
+
     private void OnDisable()
     {
         if (starRenderer != null)
@@ -57,6 +68,10 @@ public class ConstellationRenderer : MonoBehaviour
         }
     }
 
+
+    // =========================================================
+    // STAR RENDER EVENT
+    // =========================================================
 
     private void HandleStarsRendered(int eraIndex)
     {
@@ -74,6 +89,10 @@ public class ConstellationRenderer : MonoBehaviour
         RenderConstellation();
     }
 
+
+    // =========================================================
+    // RENDER CONSTELLATION
+    // =========================================================
 
     public void RenderConstellation()
     {
@@ -176,11 +195,19 @@ public class ConstellationRenderer : MonoBehaviour
     }
 
 
+    // =========================================================
+    // CREATE UI LINE
+    // =========================================================
+
     private void CreateUILine(
         string startStarName,
         string endStarName
     )
     {
+        // -----------------------------------------------------
+        // Find start star
+        // -----------------------------------------------------
+
         if (!starRenderer.spawnedStars.TryGetValue(
                 startStarName,
                 out Transform startTransform))
@@ -194,6 +221,10 @@ public class ConstellationRenderer : MonoBehaviour
             return;
         }
 
+
+        // -----------------------------------------------------
+        // Find end star
+        // -----------------------------------------------------
 
         if (!starRenderer.spawnedStars.TryGetValue(
                 endStarName,
@@ -228,12 +259,33 @@ public class ConstellationRenderer : MonoBehaviour
         }
 
 
+        // -----------------------------------------------------
+        // Convert STAR world positions
+        // into CONSTELLATION layer local positions
+        // -----------------------------------------------------
+
+        Vector3 startWorldPosition =
+            startRect.position;
+
+        Vector3 endWorldPosition =
+            endRect.position;
+
+
         Vector2 startPosition =
-            startRect.anchoredPosition;
+            constellationLayer.InverseTransformPoint(
+                startWorldPosition
+            );
+
 
         Vector2 endPosition =
-            endRect.anchoredPosition;
+            constellationLayer.InverseTransformPoint(
+                endWorldPosition
+            );
 
+
+        // -----------------------------------------------------
+        // Direction and distance
+        // -----------------------------------------------------
 
         Vector2 direction =
             endPosition - startPosition;
@@ -244,8 +296,14 @@ public class ConstellationRenderer : MonoBehaviour
 
 
         if (distance <= 0.01f)
+        {
             return;
+        }
 
+
+        // -----------------------------------------------------
+        // Create line object
+        // -----------------------------------------------------
 
         GameObject lineObject =
             new GameObject(
@@ -269,6 +327,10 @@ public class ConstellationRenderer : MonoBehaviour
         );
 
 
+        // -----------------------------------------------------
+        // RectTransform setup
+        // -----------------------------------------------------
+
         lineRect.anchorMin =
             new Vector2(0.5f, 0.5f);
 
@@ -279,16 +341,22 @@ public class ConstellationRenderer : MonoBehaviour
             new Vector2(0f, 0.5f);
 
 
+        // Start exactly at start star
         lineRect.anchoredPosition =
             startPosition;
 
 
+        // Line length + thickness
         lineRect.sizeDelta =
             new Vector2(
                 distance,
                 constellationData.lineWidth
             );
 
+
+        // -----------------------------------------------------
+        // Rotate line toward second star
+        // -----------------------------------------------------
 
         float angle =
             Mathf.Atan2(
@@ -305,6 +373,10 @@ public class ConstellationRenderer : MonoBehaviour
             );
 
 
+        // -----------------------------------------------------
+        // Line appearance
+        // -----------------------------------------------------
+
         Image lineImage =
             lineObject.GetComponent<Image>();
 
@@ -317,11 +389,19 @@ public class ConstellationRenderer : MonoBehaviour
             false;
 
 
+        // -----------------------------------------------------
+        // Store line
+        // -----------------------------------------------------
+
         lineObjects.Add(
             lineObject
         );
     }
 
+
+    // =========================================================
+    // CLEAR LINES
+    // =========================================================
 
     public void ClearLines()
     {

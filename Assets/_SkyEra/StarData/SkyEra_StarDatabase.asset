@@ -90,7 +90,7 @@ MonoBehaviour:
   - eraName: Modern Sri Lanka
     stars:
     - starName: Aldebaran
-      rightAscension: 68.9849
+      rightAscension: 4.59899
       declination: 16.5081
       altitude: 80.1962
       azimuth: 10.831

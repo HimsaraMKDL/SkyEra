@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SkyNavigationController : MonoBehaviour,
+    IBeginDragHandler,
     IDragHandler
 {
     [Header("References")]
@@ -20,12 +21,16 @@ public class SkyNavigationController : MonoBehaviour,
 
     [Header("Pan Settings")]
     [Range(0.1f, 2f)]
-    public float panSpeed = 0.65f;
+    public float panSpeed = 1f;
 
     private float currentZoom = 1f;
 
     public float CurrentZoom => currentZoom;
 
+
+    // =========================================================
+    // START
+    // =========================================================
 
     private void Start()
     {
@@ -36,9 +41,9 @@ public class SkyNavigationController : MonoBehaviour,
     }
 
 
-    // -------------------------
-    // ZOOM
-    // -------------------------
+    // =========================================================
+    // ZOOM IN
+    // =========================================================
 
     public void ZoomIn()
     {
@@ -52,6 +57,10 @@ public class SkyNavigationController : MonoBehaviour,
         ClampPan();
     }
 
+
+    // =========================================================
+    // ZOOM OUT
+    // =========================================================
 
     public void ZoomOut()
     {
@@ -71,6 +80,10 @@ public class SkyNavigationController : MonoBehaviour,
     }
 
 
+    // =========================================================
+    // RESET
+    // =========================================================
+
     public void ResetView()
     {
         currentZoom = minZoom;
@@ -79,6 +92,10 @@ public class SkyNavigationController : MonoBehaviour,
         ResetPosition();
     }
 
+
+    // =========================================================
+    // APPLY ZOOM
+    // =========================================================
 
     private void ApplyZoom()
     {
@@ -90,9 +107,19 @@ public class SkyNavigationController : MonoBehaviour,
     }
 
 
-    // -------------------------
-    // PAN
-    // -------------------------
+    // =========================================================
+    // BEGIN DRAG
+    // =========================================================
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        // Required so Unity starts the drag event sequence.
+    }
+
+
+    // =========================================================
+    // DRAG / PAN
+    // =========================================================
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -102,27 +129,30 @@ public class SkyNavigationController : MonoBehaviour,
             return;
         }
 
-        // Pan only after zooming in
-        if (currentZoom <= 1.001f)
+
+        // Do not pan when fully zoomed out
+        if (currentZoom <= minZoom + 0.001f)
         {
             return;
         }
 
+
+        // Natural mouse movement
         Vector2 movement =
-            eventData.delta *
-            panSpeed /
-            currentZoom;
+            eventData.delta * panSpeed;
+
 
         skyContent.anchoredPosition +=
             movement;
+
 
         ClampPan();
     }
 
 
-    // -------------------------
-    // BOUNDARIES
-    // -------------------------
+    // =========================================================
+    // CLAMP PAN
+    // =========================================================
 
     private void ClampPan()
     {
@@ -132,18 +162,22 @@ public class SkyNavigationController : MonoBehaviour,
             return;
         }
 
+
         float maxX =
             skyViewArea.rect.width *
             (currentZoom - 1f) *
             0.5f;
+
 
         float maxY =
             skyViewArea.rect.height *
             (currentZoom - 1f) *
             0.5f;
 
+
         Vector2 position =
             skyContent.anchoredPosition;
+
 
         position.x =
             Mathf.Clamp(
@@ -152,6 +186,7 @@ public class SkyNavigationController : MonoBehaviour,
                 maxX
             );
 
+
         position.y =
             Mathf.Clamp(
                 position.y,
@@ -159,10 +194,15 @@ public class SkyNavigationController : MonoBehaviour,
                 maxY
             );
 
+
         skyContent.anchoredPosition =
             position;
     }
 
+
+    // =========================================================
+    // RESET POSITION
+    // =========================================================
 
     private void ResetPosition()
     {
