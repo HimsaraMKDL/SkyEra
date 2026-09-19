@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ConstellationRenderer : MonoBehaviour
 {
@@ -10,11 +11,28 @@ public class ConstellationRenderer : MonoBehaviour
     [Header("Constellations")]
     public ConstellationData[] constellations;
 
-    [Header("Layer")]
+    [Header("Layers")]
     public RectTransform constellationLayer;
+    public RectTransform labelLayer;
+
+
+    [Header("Label Settings")]
+    public float labelFontSize = 22f;
+
+    public Color labelColor =
+        new Color(
+            0.8f,
+            0.9f,
+            1f,
+            0.9f
+        );
 
 
     private readonly List<GameObject> lineObjects =
+        new List<GameObject>();
+
+
+    private readonly List<GameObject> labelObjects =
         new List<GameObject>();
 
 
@@ -72,7 +90,7 @@ public class ConstellationRenderer : MonoBehaviour
 
 
     // =========================================================
-    // STARS RENDERED
+    // WHEN STARS ARE RENDERED
     // =========================================================
 
     private void HandleStarsRendered(
@@ -80,10 +98,13 @@ public class ConstellationRenderer : MonoBehaviour
     )
     {
         ClearLines();
+        ClearLabels();
 
 
         if (constellations == null)
+        {
             return;
+        }
 
 
         foreach (
@@ -92,13 +113,23 @@ public class ConstellationRenderer : MonoBehaviour
         )
         {
             if (data == null)
+            {
                 continue;
+            }
 
 
-            
+            // IMPORTANT:
+            // We intentionally do NOT check eraIndex here.
+            // The same constellation definitions are used
+            // for Ancient, Historical and Modern skies.
 
 
             RenderConstellation(
+                data
+            );
+
+
+            CreateConstellationLabel(
                 data
             );
         }
@@ -128,9 +159,11 @@ public class ConstellationRenderer : MonoBehaviour
             );
 
 
-        for (int i = 0;
-             i < connectionCount;
-             i++)
+        for (
+            int i = 0;
+            i < connectionCount;
+            i++
+        )
         {
             int startIndex =
                 data.connectionStart[i];
@@ -170,7 +203,7 @@ public class ConstellationRenderer : MonoBehaviour
 
 
     // =========================================================
-    // CREATE CONSTELLATION LINE
+    // CREATE LINE
     // =========================================================
 
     private void CreateUILine(
@@ -179,20 +212,10 @@ public class ConstellationRenderer : MonoBehaviour
         ConstellationData data
     )
     {
-        // -----------------------------------------------------
-        // Star must exist in database / renderer
-        // -----------------------------------------------------
-
         if (!starRenderer.spawnedStars.TryGetValue(
                 startStarName,
                 out Transform startTransform))
         {
-            Debug.LogWarning(
-                "ConstellationRenderer: Star not found in database [" +
-                startStarName +
-                "]"
-            );
-
             return;
         }
 
@@ -201,22 +224,11 @@ public class ConstellationRenderer : MonoBehaviour
                 endStarName,
                 out Transform endTransform))
         {
-            Debug.LogWarning(
-                "ConstellationRenderer: Star not found in database [" +
-                endStarName +
-                "]"
-            );
-
             return;
         }
 
 
-        // -----------------------------------------------------
-        // IMPORTANT:
-        // If either star is outside current celestial view,
-        // don't draw this line yet.
-        // -----------------------------------------------------
-
+        // Only connect stars currently visible
         if (!startTransform.gameObject.activeSelf ||
             !endTransform.gameObject.activeSelf)
         {
@@ -232,7 +244,8 @@ public class ConstellationRenderer : MonoBehaviour
 
 
         if (startRect == null ||
-            endRect == null)
+            endRect == null ||
+            constellationLayer == null)
         {
             return;
         }
@@ -285,7 +298,9 @@ public class ConstellationRenderer : MonoBehaviour
 
 
         if (distance <= 0.01f)
+        {
             return;
+        }
 
 
         GameObject lineObject =
@@ -372,7 +387,185 @@ public class ConstellationRenderer : MonoBehaviour
 
 
     // =========================================================
-    // CLEAR
+    // CREATE CONSTELLATION LABEL
+    // =========================================================
+
+    private void CreateConstellationLabel(
+        ConstellationData data
+    )
+    {
+        if (labelLayer == null ||
+            data.starNames == null)
+        {
+            return;
+        }
+
+
+        Vector2 totalPosition =
+            Vector2.zero;
+
+
+        int visibleStarCount =
+            0;
+
+
+        foreach (
+            string starName
+            in data.starNames
+        )
+        {
+            string cleanName =
+                StarRenderer.NormalizeStarName(
+                    starName
+                );
+
+
+            if (!starRenderer.spawnedStars.TryGetValue(
+                    cleanName,
+                    out Transform starTransform))
+            {
+                continue;
+            }
+
+
+            if (!starTransform.gameObject.activeSelf)
+            {
+                continue;
+            }
+
+
+            RectTransform starRect =
+                starTransform as RectTransform;
+
+
+            if (starRect == null)
+            {
+                continue;
+            }
+
+
+            Vector2 localPosition =
+                labelLayer.InverseTransformPoint(
+                    starRect.position
+                );
+
+
+            totalPosition +=
+                localPosition;
+
+
+            visibleStarCount++;
+        }
+
+
+        // Don't show a label if almost the entire
+        // constellation is outside the current view.
+        if (visibleStarCount < 2)
+        {
+            return;
+        }
+
+
+        Vector2 centerPosition =
+            totalPosition /
+            visibleStarCount;
+
+
+        // Slightly above the pattern
+        centerPosition.y +=
+            35f;
+
+
+        // -----------------------------------------------------
+        // CREATE LABEL OBJECT
+        // -----------------------------------------------------
+
+        GameObject labelObject =
+            new GameObject(
+                "Label_" +
+                data.constellationName,
+                typeof(RectTransform),
+                typeof(CanvasRenderer),
+                typeof(TextMeshProUGUI)
+            );
+
+
+        RectTransform labelRect =
+            labelObject.GetComponent<RectTransform>();
+
+
+        labelRect.SetParent(
+            labelLayer,
+            false
+        );
+
+
+        labelRect.anchorMin =
+            new Vector2(
+                0.5f,
+                0.5f
+            );
+
+        labelRect.anchorMax =
+            new Vector2(
+                0.5f,
+                0.5f
+            );
+
+        labelRect.pivot =
+            new Vector2(
+                0.5f,
+                0.5f
+            );
+
+
+        labelRect.anchoredPosition =
+            centerPosition;
+
+
+        labelRect.sizeDelta =
+            new Vector2(
+                220f,
+                45f
+            );
+
+
+        TextMeshProUGUI text =
+            labelObject.GetComponent<TextMeshProUGUI>();
+
+
+        text.text =
+            data.constellationName;
+
+
+        text.fontSize =
+            labelFontSize;
+
+
+        text.color =
+            labelColor;
+
+
+        text.alignment =
+            TextAlignmentOptions.Center;
+
+
+        text.fontStyle =
+            FontStyles.Bold;
+
+
+        text.raycastTarget =
+            false;
+
+
+        labelObjects.Add(
+            labelObject
+        );
+    }
+
+
+    // =========================================================
+    // CLEAR LINES
     // =========================================================
 
     public void ClearLines()
@@ -384,11 +577,37 @@ public class ConstellationRenderer : MonoBehaviour
         {
             if (line != null)
             {
-                Destroy(line);
+                Destroy(
+                    line
+                );
             }
         }
 
 
         lineObjects.Clear();
+    }
+
+
+    // =========================================================
+    // CLEAR LABELS
+    // =========================================================
+
+    public void ClearLabels()
+    {
+        foreach (
+            GameObject label
+            in labelObjects
+        )
+        {
+            if (label != null)
+            {
+                Destroy(
+                    label
+                );
+            }
+        }
+
+
+        labelObjects.Clear();
     }
 }

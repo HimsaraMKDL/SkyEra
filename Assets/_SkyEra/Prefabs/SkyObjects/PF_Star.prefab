@@ -151,6 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coreImage: {fileID: 4652222725935549480}
+  glowImage: {fileID: 1096764842022235777}
+  minimumScale: 0.45
+  maximumScale: 1.45
+  minimumCoreAlpha: 0.4
+  maximumCoreAlpha: 1
+  minimumGlowAlpha: 0.05
+  maximumGlowAlpha: 0.65
 --- !u!1 &6520790109642491012
 GameObject:
   m_ObjectHideFlags: 0

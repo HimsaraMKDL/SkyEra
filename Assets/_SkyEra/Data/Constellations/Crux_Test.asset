@@ -20,7 +20,7 @@ MonoBehaviour:
   - Gacrux
   - Delta Crucis
   - 'Epsilon Crucis '
-  connectionStart: 02000000030000000300000000000000
-  connectionEnd: 00000000010000000000000004000000
+  connectionStart: 0200000001000000
+  connectionEnd: 0000000003000000
   lineColor: {r: 1, g: 1, b: 1, a: 1}
-  lineWidth: 2
+  lineWidth: 1.5

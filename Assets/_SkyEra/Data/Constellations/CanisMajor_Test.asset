@@ -22,4 +22,4 @@ MonoBehaviour:
   connectionStart: 000000000000000002000000
   connectionEnd: 010000000200000003000000
   lineColor: {r: 1, g: 1, b: 1, a: 1}
-  lineWidth: 3
+  lineWidth: 1.5

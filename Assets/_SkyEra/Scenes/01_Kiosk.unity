@@ -826,6 +826,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326820771}
   m_CullTransparentMesh: 1
+--- !u!1 &351292351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351292352}
+  - component: {fileID: 351292354}
+  - component: {fileID: 351292353}
+  m_Layer: 5
+  m_Name: SkyBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &351292352
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351292351}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1527327278}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &351292353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351292351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 495a0baf6448ad346b9d4aad26511faf, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &351292354
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351292351}
+  m_CullTransparentMesh: 1
 --- !u!1 &450562701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,6 +2299,10 @@ MonoBehaviour:
   starLayer: {fileID: 865815033}
   coordinateConverter: {fileID: 632392206}
   astronomyCalculator: {fileID: 547491181}
+  referenceDatasetIndex: 2
+  ancientYear: -249
+  historicalYear: 1700
+  modernYear: 2026
 --- !u!4 &900541712
 Transform:
   m_ObjectHideFlags: 0
@@ -3118,6 +3197,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 93cbcbe6d4b352442b37a147b510f2d1, type: 2}
   - {fileID: 11400000, guid: 8ef2698d226e08a4f99286d3d6b10934, type: 2}
   constellationLayer: {fileID: 630610444}
+  labelLayer: {fileID: 979988607}
+  labelFontSize: 22
+  labelColor: {r: 0.8, g: 0.9, b: 1, a: 0.9}
 --- !u!4 &1502273227
 Transform:
   m_ObjectHideFlags: 0
@@ -3220,6 +3302,7 @@ GameObject:
   - component: {fileID: 1527327280}
   - component: {fileID: 1527327279}
   - component: {fileID: 1527327281}
+  - component: {fileID: 1527327282}
   m_Layer: 5
   m_Name: SkyViewArea
   m_TagString: Untagged
@@ -3239,14 +3322,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 351292352}
   - {fileID: 1682437036}
   - {fileID: 66604302}
   m_Father: {fileID: 765619128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 70}
-  m_SizeDelta: {x: 1220, y: 700}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1527327279
 MonoBehaviour:
@@ -3261,7 +3345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.020208225, g: 0.039215688, b: 0.09803922, a: 1}
+  m_Color: {r: 0.02959238, g: 0.06773919, b: 0.1792453, a: 0.019607844}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3300,10 +3384,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyViewArea: {fileID: 1527327278}
   skyContent: {fileID: 1682437036}
+  coordinateConverter: {fileID: 632392206}
+  starRenderer: {fileID: 900541711}
   minZoom: 1
   maxZoom: 3
   zoomStep: 0.25
-  panSpeed: 0.19
+  horizontalRotationSpeed: 0.015
+  verticalRotationSpeed: 0.08
+--- !u!114 &1527327282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527327277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &1581584136
 GameObject:
   m_ObjectHideFlags: 0
