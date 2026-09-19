@@ -439,3 +439,101 @@ MonoBehaviour:
       azimuth: 0
       magnitude: 2.9
       size: 1
+    - starName: Mebsuta
+      rightAscension: 6.7319
+      declination: 25.1311
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.06
+      size: 1
+    - starName: Mekbuda
+      rightAscension: 7.0683
+      declination: 20.5703
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.01
+      size: 1
+    - starName: Upsilon Geminorum
+      rightAscension: 7.5989
+      declination: 26.8958
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.06
+      size: 1
+    - starName: Kappa Geminorum
+      rightAscension: 7.7408
+      declination: 24.3981
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.57
+      size: 1
+    - starName: Propus
+      rightAscension: 6.2478
+      declination: 22.5067
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.31
+      size: 1
+    - starName: Tejat Posterior
+      rightAscension: 6.3828
+      declination: 22.5133
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.87
+      size: 1
+    - starName: Lambda Geminorum
+      rightAscension: 7.30156
+      declination: 16.54047
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.58
+      size: 1
+    - starName: Alzirr
+      rightAscension: 6.75484
+      declination: 12.89606
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.35
+      size: 1
+    - starName: Iota Geminorum
+      rightAscension: 7.4288
+      declination: 27.79828
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.78
+      size: 1
+    - starName: Tau Geminorum
+      rightAscension: 7.18566
+      declination: 30.24528
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.41
+      size: 1
+    - starName: Rho Geminorum
+      rightAscension: 7.48517
+      declination: 31.78408
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.16
+      size: 1
+    - starName: Theta Geminorum
+      rightAscension: 6.87982
+      declination: 33.96136
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.6
+      size: 1
+    - starName: Nu Geminorum
+      rightAscension: 6.48272
+      declination: 20.21217
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.13
+      size: 1
+    - starName: Geminorum
+      rightAscension: 6.87982
+      declination: 33.96136
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.6
+      size: 1

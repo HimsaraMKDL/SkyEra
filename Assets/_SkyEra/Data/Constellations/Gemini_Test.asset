@@ -15,11 +15,25 @@ MonoBehaviour:
   constellationName: Gemini
   eraIndex: 2
   starNames:
-  - Castor
-  - Pollux
-  - Wasat
   - Alhena
-  connectionStart: 000000000100000002000000
-  connectionEnd: 020000000200000003000000
+  - Mekbuda
+  - Wasat
+  - Lambda Geminorum
+  - Alzirr
+  - Upsilon Geminorum
+  - Kappa Geminorum
+  - Pollux
+  - Alhena
+  - Iota Geminorum
+  - Castor
+  - Rho Geminorum
+  - Theta Geminorum
+  - Mebsuta
+  - Nu Geminorum
+  - Tejat Posterior
+  - Propus
+  - Geminorum
+  connectionStart: 000000000100000002000000030000000200000005000000050000000500000008000000090000000a00000009000000090000000d0000000d0000000f0000000f000000
+  connectionEnd: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
   lineColor: {r: 1, g: 1, b: 1, a: 1}
   lineWidth: 1.5

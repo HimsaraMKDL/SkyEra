@@ -67,6 +67,7 @@
     <Compile Include="Assets\_SkyEra\Scripts\Era\EraManager.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Sky\StarView.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Utilities.cs" />
+    <Compile Include="Assets\_SkyEra\Scripts\Sky\StarPatternValidator.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Sky\ConstellationData.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Sky\StarDatabase.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Sky\StarData.cs" />
