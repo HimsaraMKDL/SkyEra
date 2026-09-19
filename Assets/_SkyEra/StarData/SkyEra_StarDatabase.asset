@@ -96,31 +96,346 @@ MonoBehaviour:
       azimuth: 10.831
       magnitude: 0.86
       size: 1
-    - starName: Star_B
-      rightAscension: 0
-      declination: 0
+    - starName: Elnath
+      rightAscension: 5.4382
+      declination: 28.6075
       altitude: 0
       azimuth: 0
-      magnitude: 0
-      size: 1.2
-    - starName: Star_C
-      rightAscension: 0
-      declination: 0
-      altitude: 0
-      azimuth: 0
-      magnitude: 0
+      magnitude: 1.65
       size: 1
-    - starName: Star_D
-      rightAscension: 0
-      declination: 0
+    - starName: Zeta Tauri
+      rightAscension: 5.6274
+      declination: 21.1425
       altitude: 0
       azimuth: 0
-      magnitude: 0
-      size: 0.8
-    - starName: Star_E
-      rightAscension: 0
-      declination: 0
+      magnitude: 3
+      size: 1
+    - starName: Gamma Tauri
+      rightAscension: 4.32989
+      declination: 15.62764
       altitude: 0
       azimuth: 0
-      magnitude: 0
+      magnitude: 3.65
+      size: 1
+    - starName: Lambda Tauri
+      rightAscension: 4.01134
+      declination: 12.49034
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.37
+      size: 1
+    - starName: Castor
+      rightAscension: 7.5767
+      declination: 31.8883
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.58
+      size: 1
+    - starName: Pollux
+      rightAscension: 7.7553
+      declination: 28.0262
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.14
+      size: 1
+    - starName: Wasat
+      rightAscension: 7.3354
+      declination: 21.9823
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.53
+      size: 1
+    - starName: Alhena
+      rightAscension: 6.6285
+      declination: 6.6285
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.92
+      size: 1
+    - starName: Betelgeuse
+      rightAscension: 5.91953
+      declination: 7.40706
+      altitude: 0
+      azimuth: 0
+      magnitude: 0.5
+      size: 1
+    - starName: Bellatrix
+      rightAscension: 5.41885
+      declination: 6.3497
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.64
+      size: 1
+    - starName: Mintaka
+      rightAscension: 5.53344
+      declination: -0.2991
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.23
+      size: 1
+    - starName: Alnilam
+      rightAscension: 5.60356
+      declination: -1.20192
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.69
+      size: 1
+    - starName: Alnitak
+      rightAscension: 5.67931
+      declination: -1.94257
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.74
+      size: 1
+    - starName: Saiph
+      rightAscension: 5.79594
+      declination: -9.6696
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.06
+      size: 1
+    - starName: Rigel
+      rightAscension: 5.2423
+      declination: -8.20164
+      altitude: 0
+      azimuth: 0
+      magnitude: 0.13
+      size: 1
+    - starName: Sirius
+      rightAscension: 6.75248
+      declination: -16.71612
+      altitude: 0
+      azimuth: 0
+      magnitude: -1.46
+      size: 1
+    - starName: Mirzam
+      rightAscension: 6.37833
+      declination: -17.95592
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.98
+      size: 1
+    - starName: Wezen
+      rightAscension: 7.13986
+      declination: -26.3932
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.83
+      size: 1
+    - starName: Adhara
+      rightAscension: 6.9771
+      declination: -28.97209
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.5
+      size: 1
+    - starName: Regulus
+      rightAscension: 10.13953
+      declination: 11.96719
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.36
+      size: 1
+    - starName: Algieba
+      rightAscension: 10.33286
+      declination: 19.8415
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.01
+      size: 1
+    - starName: Zosma
+      rightAscension: 11.23514
+      declination: 20.52372
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.56
+      size: 1
+    - starName: Chertan
+      rightAscension: 11.23734
+      declination: 15.42957
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.33
+      size: 1
+    - starName: Denebola
+      rightAscension: 11.81767
+      declination: 14.57206
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.14
+      size: 1
+    - starName: Spica
+      rightAscension: 13.41988
+      declination: -11.16132
+      altitude: 0
+      azimuth: 0
+      magnitude: 0.97
+      size: 1
+    - starName: Porrima
+      rightAscension: 12.69434
+      declination: -1.4494
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.74
+      size: 1
+    - starName: Vindemiatrix
+      rightAscension: 13.03628
+      declination: 10.95915
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.83
+      size: 1
+    - starName: Zaniah
+      rightAscension: 12.33178
+      declination: -0.66681
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.89
+      size: 1
+    - starName: Heze
+      rightAscension: 13.57822
+      declination: -0.59583
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.38
+      size: 1
+    - starName: Acrux
+      rightAscension: 12.44331
+      declination: -63.09909
+      altitude: 0
+      azimuth: 0
+      magnitude: 0.76
+      size: 1
+    - starName: Mimosa
+      rightAscension: 12.79535
+      declination: -59.68876
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.25
+      size: 1
+    - starName: Gacrux
+      rightAscension: 12.51943
+      declination: -57.11321
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.63
+      size: 1
+    - starName: Delta Crucis
+      rightAscension: 12.25243
+      declination: -58.74893
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.79
+      size: 1
+    - starName: Epsilon Crucis
+      rightAscension: 12.35601
+      declination: -60.40115
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.58
+      size: 1
+    - starName: Antares
+      rightAscension: 16.49013
+      declination: -26.43195
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.06
+      size: 1
+    - starName: Dschubba
+      rightAscension: 16.00556
+      declination: -22.62171
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.29
+      size: 1
+    - starName: Sargas
+      rightAscension: 17.62198
+      declination: -42.99806
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.86
+      size: 1
+    - starName: Shaula
+      rightAscension: 17.56014
+      declination: -37.10382
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.62
+      size: 1
+    - starName: Lesath
+      rightAscension: 17.51274
+      declination: -37.29583
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.7
+      size: 1
+    - starName: Kaus Australis
+      rightAscension: 18.40287
+      declination: -34.38462
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.85
+      size: 1
+    - starName: Kaus Media
+      rightAscension: 18.3499
+      declination: -29.8281
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.7
+      size: 1
+    - starName: Kaus Borealis
+      rightAscension: 18.46618
+      declination: -25.4217
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.82
+      size: 1
+    - starName: Nunki
+      rightAscension: 18.92109
+      declination: -26.29672
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.05
+      size: 1
+    - starName: Ascella
+      rightAscension: 19.04354
+      declination: -29.88006
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.59
+      size: 1
+    - starName: Deneb
+      rightAscension: 20.69053
+      declination: 45.28034
+      altitude: 0
+      azimuth: 0
+      magnitude: 1.25
+      size: 1
+    - starName: Sadr
+      rightAscension: 20.37047
+      declination: 40.25668
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.23
+      size: 1
+    - starName: Aljanah
+      rightAscension: 20.77019
+      declination: 33.97033
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.48
+      size: 1
+    - starName: Fawaris
+      rightAscension: 19.74958
+      declination: 45.13079
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.87
+      size: 1
+    - starName: Albireo
+      rightAscension: 19.51202
+      declination: 27.95968
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.9
       size: 1

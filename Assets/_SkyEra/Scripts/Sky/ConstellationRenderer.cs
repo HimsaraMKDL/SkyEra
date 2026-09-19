@@ -5,11 +5,14 @@ using UnityEngine.UI;
 public class ConstellationRenderer : MonoBehaviour
 {
     [Header("References")]
-    public ConstellationData constellationData;
     public StarRenderer starRenderer;
+
+    [Header("Constellations")]
+    public ConstellationData[] constellations;
 
     [Header("Layer")]
     public RectTransform constellationLayer;
+
 
     private readonly List<GameObject> lineObjects =
         new List<GameObject>();
@@ -38,8 +41,7 @@ public class ConstellationRenderer : MonoBehaviour
         if (starRenderer == null)
         {
             Debug.LogError(
-                "ConstellationRenderer: " +
-                "StarRenderer reference is missing."
+                "ConstellationRenderer: StarRenderer missing."
             );
 
             return;
@@ -70,142 +72,115 @@ public class ConstellationRenderer : MonoBehaviour
 
 
     // =========================================================
-    // STAR RENDER EVENT
+    // STARS RENDERED
     // =========================================================
 
-    private void HandleStarsRendered(int eraIndex)
+    private void HandleStarsRendered(
+        int eraIndex
+    )
     {
         ClearLines();
 
 
-        if (constellationData == null)
+        if (constellations == null)
             return;
 
 
-        if (constellationData.eraIndex != eraIndex)
-            return;
+        foreach (
+            ConstellationData data
+            in constellations
+        )
+        {
+            if (data == null)
+                continue;
 
 
-        RenderConstellation();
+            
+
+
+            RenderConstellation(
+                data
+            );
+        }
     }
 
 
     // =========================================================
-    // RENDER CONSTELLATION
+    // RENDER ONE CONSTELLATION
     // =========================================================
 
-    public void RenderConstellation()
+    private void RenderConstellation(
+        ConstellationData data
+    )
     {
-        ClearLines();
-
-
-        if (constellationData == null)
+        if (data.starNames == null ||
+            data.connectionStart == null ||
+            data.connectionEnd == null)
         {
-            Debug.LogWarning(
-                "ConstellationRenderer: " +
-                "No constellation data assigned."
-            );
-
-            return;
-        }
-
-
-        if (starRenderer == null)
-        {
-            Debug.LogWarning(
-                "ConstellationRenderer: " +
-                "StarRenderer reference missing."
-            );
-
-            return;
-        }
-
-
-        if (constellationLayer == null)
-        {
-            Debug.LogWarning(
-                "ConstellationRenderer: " +
-                "Constellation Layer missing."
-            );
-
-            return;
-        }
-
-
-        if (constellationData.starNames == null ||
-            constellationData.connectionStart == null ||
-            constellationData.connectionEnd == null)
-        {
-            Debug.LogWarning(
-                "ConstellationRenderer: " +
-                "Constellation data incomplete."
-            );
-
             return;
         }
 
 
         int connectionCount =
             Mathf.Min(
-                constellationData.connectionStart.Length,
-                constellationData.connectionEnd.Length
+                data.connectionStart.Length,
+                data.connectionEnd.Length
             );
 
 
-        for (int i = 0; i < connectionCount; i++)
+        for (int i = 0;
+             i < connectionCount;
+             i++)
         {
             int startIndex =
-                constellationData.connectionStart[i];
+                data.connectionStart[i];
 
             int endIndex =
-                constellationData.connectionEnd[i];
+                data.connectionEnd[i];
 
 
             if (startIndex < 0 ||
-                startIndex >= constellationData.starNames.Length ||
+                startIndex >= data.starNames.Length ||
                 endIndex < 0 ||
-                endIndex >= constellationData.starNames.Length)
+                endIndex >= data.starNames.Length)
             {
-                Debug.LogWarning(
-                    "ConstellationRenderer: " +
-                    "Invalid connection index."
-                );
-
                 continue;
             }
 
 
             string startName =
                 StarRenderer.NormalizeStarName(
-                    constellationData.starNames[startIndex]
+                    data.starNames[startIndex]
                 );
 
 
             string endName =
                 StarRenderer.NormalizeStarName(
-                    constellationData.starNames[endIndex]
+                    data.starNames[endIndex]
                 );
 
 
             CreateUILine(
                 startName,
-                endName
+                endName,
+                data
             );
         }
     }
 
 
     // =========================================================
-    // CREATE UI LINE
+    // CREATE CONSTELLATION LINE
     // =========================================================
 
     private void CreateUILine(
         string startStarName,
-        string endStarName
+        string endStarName,
+        ConstellationData data
     )
     {
         // -----------------------------------------------------
-        // Find start star
+        // Star must exist in database / renderer
         // -----------------------------------------------------
 
         if (!starRenderer.spawnedStars.TryGetValue(
@@ -213,7 +188,7 @@ public class ConstellationRenderer : MonoBehaviour
                 out Transform startTransform))
         {
             Debug.LogWarning(
-                "ConstellationRenderer: Missing star: [" +
+                "ConstellationRenderer: Star not found in database [" +
                 startStarName +
                 "]"
             );
@@ -222,20 +197,29 @@ public class ConstellationRenderer : MonoBehaviour
         }
 
 
-        // -----------------------------------------------------
-        // Find end star
-        // -----------------------------------------------------
-
         if (!starRenderer.spawnedStars.TryGetValue(
                 endStarName,
                 out Transform endTransform))
         {
             Debug.LogWarning(
-                "ConstellationRenderer: Missing star: [" +
+                "ConstellationRenderer: Star not found in database [" +
                 endStarName +
                 "]"
             );
 
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // IMPORTANT:
+        // If either star is outside current celestial view,
+        // don't draw this line yet.
+        // -----------------------------------------------------
+
+        if (!startTransform.gameObject.activeSelf ||
+            !endTransform.gameObject.activeSelf)
+        {
             return;
         }
 
@@ -250,45 +234,50 @@ public class ConstellationRenderer : MonoBehaviour
         if (startRect == null ||
             endRect == null)
         {
-            Debug.LogWarning(
-                "ConstellationRenderer: " +
-                "Stars require RectTransforms."
-            );
-
             return;
         }
 
 
-        // -----------------------------------------------------
-        // Convert STAR world positions
-        // into CONSTELLATION layer local positions
-        // -----------------------------------------------------
-
-        Vector3 startWorldPosition =
-            startRect.position;
-
-        Vector3 endWorldPosition =
-            endRect.position;
-
-
         Vector2 startPosition =
             constellationLayer.InverseTransformPoint(
-                startWorldPosition
+                startRect.position
             );
 
 
         Vector2 endPosition =
             constellationLayer.InverseTransformPoint(
-                endWorldPosition
+                endRect.position
             );
 
 
-        // -----------------------------------------------------
-        // Direction and distance
-        // -----------------------------------------------------
+        CreateSingleLine(
+            startPosition,
+            endPosition,
+            data,
+            "Line_" +
+            data.constellationName +
+            "_" +
+            startStarName +
+            "_to_" +
+            endStarName
+        );
+    }
 
+
+    // =========================================================
+    // CREATE SINGLE UI LINE
+    // =========================================================
+
+    private void CreateSingleLine(
+        Vector2 startPosition,
+        Vector2 endPosition,
+        ConstellationData data,
+        string objectName
+    )
+    {
         Vector2 direction =
-            endPosition - startPosition;
+            endPosition -
+            startPosition;
 
 
         float distance =
@@ -296,21 +285,12 @@ public class ConstellationRenderer : MonoBehaviour
 
 
         if (distance <= 0.01f)
-        {
             return;
-        }
 
-
-        // -----------------------------------------------------
-        // Create line object
-        // -----------------------------------------------------
 
         GameObject lineObject =
             new GameObject(
-                "Line_" +
-                startStarName +
-                "_to_" +
-                endStarName,
+                objectName,
                 typeof(RectTransform),
                 typeof(CanvasRenderer),
                 typeof(Image)
@@ -327,42 +307,42 @@ public class ConstellationRenderer : MonoBehaviour
         );
 
 
-        // -----------------------------------------------------
-        // RectTransform setup
-        // -----------------------------------------------------
-
         lineRect.anchorMin =
-            new Vector2(0.5f, 0.5f);
+            new Vector2(
+                0.5f,
+                0.5f
+            );
 
         lineRect.anchorMax =
-            new Vector2(0.5f, 0.5f);
+            new Vector2(
+                0.5f,
+                0.5f
+            );
 
         lineRect.pivot =
-            new Vector2(0f, 0.5f);
+            new Vector2(
+                0f,
+                0.5f
+            );
 
 
-        // Start exactly at start star
         lineRect.anchoredPosition =
             startPosition;
 
 
-        // Line length + thickness
         lineRect.sizeDelta =
             new Vector2(
                 distance,
-                constellationData.lineWidth
+                data.lineWidth
             );
 
-
-        // -----------------------------------------------------
-        // Rotate line toward second star
-        // -----------------------------------------------------
 
         float angle =
             Mathf.Atan2(
                 direction.y,
                 direction.x
-            ) * Mathf.Rad2Deg;
+            ) *
+            Mathf.Rad2Deg;
 
 
         lineRect.localRotation =
@@ -373,25 +353,17 @@ public class ConstellationRenderer : MonoBehaviour
             );
 
 
-        // -----------------------------------------------------
-        // Line appearance
-        // -----------------------------------------------------
-
         Image lineImage =
             lineObject.GetComponent<Image>();
 
 
         lineImage.color =
-            constellationData.lineColor;
+            data.lineColor;
 
 
         lineImage.raycastTarget =
             false;
 
-
-        // -----------------------------------------------------
-        // Store line
-        // -----------------------------------------------------
 
         lineObjects.Add(
             lineObject
@@ -400,12 +372,15 @@ public class ConstellationRenderer : MonoBehaviour
 
 
     // =========================================================
-    // CLEAR LINES
+    // CLEAR
     // =========================================================
 
     public void ClearLines()
     {
-        foreach (GameObject line in lineObjects)
+        foreach (
+            GameObject line
+            in lineObjects
+        )
         {
             if (line != null)
             {

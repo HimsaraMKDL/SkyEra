@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c7a06e31c5432d47900ae8c463147c6, type: 3}
-  m_Name: Taurus_Test
+  m_Name: CanisMajor_Test
   m_EditorClassIdentifier: 
-  constellationName: Taurus
+  constellationName: Canis Major
   eraIndex: 2
   starNames:
-  - Aldebaran
-  - Elnath
-  - Zeta Tauri
-  - Gamma Tauri
-  - Lambda Tauri
-  connectionStart: 03000000030000000000000000000000
-  connectionEnd: 04000000000000000100000002000000
+  - Sirius
+  - Mirzam
+  - Wezen
+  - Adhara
+  connectionStart: 000000000000000002000000
+  connectionEnd: 010000000200000003000000
   lineColor: {r: 1, g: 1, b: 1, a: 1}
-  lineWidth: 2
+  lineWidth: 3

@@ -15,11 +15,10 @@ public class AstronomyCalculator : MonoBehaviour
     [Header("Time Settings")]
 
     [Tooltip("Use the computer's current UTC date and time.")]
-    public bool useCurrentTime = true;
+    public bool useCurrentTime = false;
 
     [Tooltip("Manual UTC time used when Use Current Time is disabled.")]
-    public DateTime manualUtcTime =
-        new DateTime(2026, 1, 15, 15, 30, 00);
+    public DateTime manualUtcTime = new DateTime(2026, 1, 15, 15, 40, 00);
 
 
     // =========================================================

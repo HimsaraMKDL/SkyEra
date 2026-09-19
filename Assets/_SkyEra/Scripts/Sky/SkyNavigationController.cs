@@ -2,14 +2,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SkyNavigationController : MonoBehaviour,
-    IBeginDragHandler,
     IDragHandler
 {
     [Header("References")]
     public RectTransform skyViewArea;
     public RectTransform skyContent;
 
+    public SkyCoordinateConverter coordinateConverter;
+    public StarRenderer starRenderer;
+
+
     [Header("Zoom Settings")]
+
     [Min(0.1f)]
     public float minZoom = 1f;
 
@@ -19,13 +23,21 @@ public class SkyNavigationController : MonoBehaviour,
     [Min(0.05f)]
     public float zoomStep = 0.25f;
 
-    [Header("Pan Settings")]
-    [Range(0.1f, 2f)]
-    public float panSpeed = 1f;
+
+    [Header("Sky Rotation Settings")]
+
+    [Tooltip("Horizontal swipe sensitivity.")]
+    public float horizontalRotationSpeed = 0.015f;
+
+    [Tooltip("Vertical swipe sensitivity.")]
+    public float verticalRotationSpeed = 0.08f;
+
 
     private float currentZoom = 1f;
 
-    public float CurrentZoom => currentZoom;
+
+    public float CurrentZoom =>
+        currentZoom;
 
 
     // =========================================================
@@ -37,7 +49,6 @@ public class SkyNavigationController : MonoBehaviour,
         currentZoom = minZoom;
 
         ApplyZoom();
-        ResetPosition();
     }
 
 
@@ -47,14 +58,15 @@ public class SkyNavigationController : MonoBehaviour,
 
     public void ZoomIn()
     {
-        currentZoom = Mathf.Clamp(
-            currentZoom + zoomStep,
-            minZoom,
-            maxZoom
-        );
+        currentZoom =
+            Mathf.Clamp(
+                currentZoom + zoomStep,
+                minZoom,
+                maxZoom
+            );
+
 
         ApplyZoom();
-        ClampPan();
     }
 
 
@@ -64,32 +76,47 @@ public class SkyNavigationController : MonoBehaviour,
 
     public void ZoomOut()
     {
-        currentZoom = Mathf.Clamp(
-            currentZoom - zoomStep,
-            minZoom,
-            maxZoom
-        );
+        currentZoom =
+            Mathf.Clamp(
+                currentZoom - zoomStep,
+                minZoom,
+                maxZoom
+            );
+
 
         ApplyZoom();
-        ClampPan();
-
-        if (Mathf.Approximately(currentZoom, minZoom))
-        {
-            ResetPosition();
-        }
     }
 
 
     // =========================================================
-    // RESET
+    // RESET VIEW
     // =========================================================
 
     public void ResetView()
     {
-        currentZoom = minZoom;
+        currentZoom =
+            minZoom;
+
 
         ApplyZoom();
-        ResetPosition();
+
+
+        if (coordinateConverter != null)
+        {
+            coordinateConverter
+                .SetCenterRightAscension(6f);
+
+
+            coordinateConverter
+                .SetCenterDeclination(10f);
+        }
+
+
+        if (starRenderer != null)
+        {
+            starRenderer
+                .RefreshCurrentView();
+        }
     }
 
 
@@ -100,116 +127,100 @@ public class SkyNavigationController : MonoBehaviour,
     private void ApplyZoom()
     {
         if (skyContent == null)
+        {
             return;
+        }
+
 
         skyContent.localScale =
-            Vector3.one * currentZoom;
-    }
+            Vector3.one *
+            currentZoom;
 
 
-    // =========================================================
-    // BEGIN DRAG
-    // =========================================================
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        // Required so Unity starts the drag event sequence.
-    }
-
-
-    // =========================================================
-    // DRAG / PAN
-    // =========================================================
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (skyContent == null ||
-            skyViewArea == null)
-        {
-            return;
-        }
-
-
-        // Do not pan when fully zoomed out
-        if (currentZoom <= minZoom + 0.001f)
-        {
-            return;
-        }
-
-
-        // Natural mouse movement
-        Vector2 movement =
-            eventData.delta * panSpeed;
-
-
-        skyContent.anchoredPosition +=
-            movement;
-
-
-        ClampPan();
-    }
-
-
-    // =========================================================
-    // CLAMP PAN
-    // =========================================================
-
-    private void ClampPan()
-    {
-        if (skyContent == null ||
-            skyViewArea == null)
-        {
-            return;
-        }
-
-
-        float maxX =
-            skyViewArea.rect.width *
-            (currentZoom - 1f) *
-            0.5f;
-
-
-        float maxY =
-            skyViewArea.rect.height *
-            (currentZoom - 1f) *
-            0.5f;
-
-
-        Vector2 position =
-            skyContent.anchoredPosition;
-
-
-        position.x =
-            Mathf.Clamp(
-                position.x,
-                -maxX,
-                maxX
-            );
-
-
-        position.y =
-            Mathf.Clamp(
-                position.y,
-                -maxY,
-                maxY
-            );
-
-
+        // Keep content centered.
         skyContent.anchoredPosition =
-            position;
+            Vector2.zero;
     }
 
 
     // =========================================================
-    // RESET POSITION
+    // DRAG / SWIPE = ROTATE CELESTIAL SKY
     // =========================================================
 
-    private void ResetPosition()
+    public void OnDrag(
+        PointerEventData eventData
+    )
     {
-        if (skyContent != null)
+        if (coordinateConverter == null ||
+            starRenderer == null)
         {
-            skyContent.anchoredPosition =
-                Vector2.zero;
+            return;
         }
+
+
+        Vector2 delta =
+            eventData.delta;
+
+
+        // -----------------------------------------------------
+        // HORIZONTAL
+        //
+        // Drag left/right changes Right Ascension.
+        // RA range = 0 - 24 hours.
+        // -----------------------------------------------------
+
+        float newRA =
+            coordinateConverter.centerRightAscension
+            +
+            delta.x *
+            horizontalRotationSpeed;
+
+
+        newRA =
+            Mathf.Repeat(
+                newRA,
+                24f
+            );
+
+
+        coordinateConverter
+            .SetCenterRightAscension(
+                newRA
+            );
+
+
+        // -----------------------------------------------------
+        // VERTICAL
+        //
+        // Drag up/down changes Declination.
+        // -----------------------------------------------------
+
+        float newDec =
+            coordinateConverter.centerDeclination
+            +
+            delta.y *
+            verticalRotationSpeed;
+
+
+        newDec =
+            Mathf.Clamp(
+                newDec,
+                -80f,
+                80f
+            );
+
+
+        coordinateConverter
+            .SetCenterDeclination(
+                newDec
+            );
+
+
+        // -----------------------------------------------------
+        // REBUILD CURRENT CELESTIAL VIEW
+        // -----------------------------------------------------
+
+        starRenderer
+            .RefreshCurrentView();
     }
 }
