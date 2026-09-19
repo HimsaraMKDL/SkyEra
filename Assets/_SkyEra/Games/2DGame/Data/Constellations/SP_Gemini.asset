@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e42d186219764a846466c53d077e4, type: 3}
+  m_Name: SP_Gemini
+  m_EditorClassIdentifier: 
+  patternId: CON_04
+  displayName: Gemini
+  educationalDescription: Gemini, the Twins, is recognized by the bright stars Castor
+    and Pollux, which represent the heads of the Twins.
+  stars:
+  - starId: GEM_01
+    displayName: Castor
+    normalizedPosition: {x: 0.36, y: 0.86}
+    importantStar: 1
+  - starId: GEM_02
+    displayName: Pollux
+    normalizedPosition: {x: 0.64, y: 0.84}
+    importantStar: 1
+  - starId: GEM_03
+    displayName: Mebsuta
+    normalizedPosition: {x: 0.38, y: 0.68}
+    importantStar: 1
+  - starId: GEM_04
+    displayName: Wasat
+    normalizedPosition: {x: 0.36, y: 0.45}
+    importantStar: 1
+  - starId: GEM_05
+    displayName: Alhena
+    normalizedPosition: {x: 0.61, y: 0.43}
+    importantStar: 1
+  - starId: GEM_06
+    displayName: Gemini Star 6
+    normalizedPosition: {x: 0.31, y: 0.16}
+    importantStar: 0
+  - starId: GEM_07
+    displayName: Gemini Star 7
+    normalizedPosition: {x: 0.66, y: 0.16}
+    importantStar: 0
+  - starId: GEM_08
+    displayName: Gemini Star 8
+    normalizedPosition: {x: 0.58, y: 0.65}
+    importantStar: 0
+  connections:
+  - fromStarId: GEM_01
+    toStarId: GEM_03
+  - fromStarId: GEM_03
+    toStarId: GEM_04
+  - fromStarId: GEM_04
+    toStarId: GEM_06
+  - fromStarId: GEM_02
+    toStarId: GEM_08
+  - fromStarId: GEM_08
+    toStarId: GEM_05
+  - fromStarId: GEM_05
+    toStarId: GEM_07
+  - fromStarId: GEM_03
+    toStarId: GEM_08

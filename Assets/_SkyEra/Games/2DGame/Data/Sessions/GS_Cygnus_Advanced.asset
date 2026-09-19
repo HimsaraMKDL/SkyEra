@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e722fd1cbbdea4241a0ac84a36504249, type: 3}
+  m_Name: GS_Cygnus_Advanced
+  m_EditorClassIdentifier: 
+  sessionId: CON_10_advanced
+  displayName: Cygnus - Advanced
+  displayOrder: 29
+  starPattern: {fileID: 11400000, guid: 7f8e5ff559aa37f4ab4a9464b83e6508, type: 2}
+  gameMode: {fileID: 11400000, guid: 9b2c7b303d622d74d9f606088cfce448, type: 2}
+  available: 1

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e42d186219764a846466c53d077e4, type: 3}
+  m_Name: SP_Cygnus
+  m_EditorClassIdentifier: 
+  patternId: CON_10
+  displayName: Cygnus
+  educationalDescription: Cygnus, the Swan, forms a recognizable cross-shaped pattern,
+    with bright Deneb marking the Swan's tail.
+  stars:
+  - starId: CYG_01
+    displayName: Deneb
+    normalizedPosition: {x: 0.5, y: 0.86}
+    importantStar: 1
+  - starId: CYG_02
+    displayName: Sadr
+    normalizedPosition: {x: 0.5, y: 0.56}
+    importantStar: 1
+  - starId: CYG_03
+    displayName: Albireo
+    normalizedPosition: {x: 0.5, y: 0.16}
+    importantStar: 1
+  - starId: CYG_04
+    displayName: Gienah
+    normalizedPosition: {x: 0.22, y: 0.56}
+    importantStar: 1
+  - starId: CYG_05
+    displayName: Delta Cygni
+    normalizedPosition: {x: 0.78, y: 0.56}
+    importantStar: 1
+  - starId: CYG_06
+    displayName: Cygnus Star 6
+    normalizedPosition: {x: 0.5, y: 0.35}
+    importantStar: 0
+  connections:
+  - fromStarId: CYG_01
+    toStarId: CYG_02
+  - fromStarId: CYG_02
+    toStarId: CYG_04
+  - fromStarId: CYG_02
+    toStarId: CYG_05
+  - fromStarId: CYG_02
+    toStarId: CYG_06
+  - fromStarId: CYG_06
+    toStarId: CYG_03

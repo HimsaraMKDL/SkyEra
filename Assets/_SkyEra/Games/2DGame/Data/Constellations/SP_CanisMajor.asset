@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e42d186219764a846466c53d077e4, type: 3}
+  m_Name: SP_CanisMajor
+  m_EditorClassIdentifier: 
+  patternId: CON_03
+  displayName: Canis Major
+  educationalDescription: Canis Major, the Great Dog, contains Sirius, the brightest
+    star in Earth's night sky.
+  stars:
+  - starId: CMA_01
+    displayName: Sirius
+    normalizedPosition: {x: 0.72, y: 0.5}
+    importantStar: 1
+  - starId: CMA_02
+    displayName: Mirzam
+    normalizedPosition: {x: 0.68, y: 0.22}
+    importantStar: 1
+  - starId: CMA_03
+    displayName: Wezen
+    normalizedPosition: {x: 0.31, y: 0.69}
+    importantStar: 1
+  - starId: CMA_04
+    displayName: Adhara
+    normalizedPosition: {x: 0.22, y: 0.56}
+    importantStar: 1
+  - starId: CMA_05
+    displayName: Aludra
+    normalizedPosition: {x: 0.43, y: 0.66}
+    importantStar: 1
+  - starId: CMA_06
+    displayName: Canis Major Star 6
+    normalizedPosition: {x: 0.85, y: 0.67}
+    importantStar: 0
+  connections:
+  - fromStarId: CMA_04
+    toStarId: CMA_03
+  - fromStarId: CMA_03
+    toStarId: CMA_05
+  - fromStarId: CMA_05
+    toStarId: CMA_01
+  - fromStarId: CMA_03
+    toStarId: CMA_01
+  - fromStarId: CMA_01
+    toStarId: CMA_02
+  - fromStarId: CMA_01
+    toStarId: CMA_06

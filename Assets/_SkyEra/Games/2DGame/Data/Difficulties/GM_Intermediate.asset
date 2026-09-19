@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2826d9dc865466d4ea1e8f2f1339b61e, type: 3}
+  m_Name: GM_Intermediate
+  m_EditorClassIdentifier: 
+  modeId: intermediate
+  displayName: Intermediate
+  instructions: Connect the stars to complete the correct star pattern with less
+    guidance. Use your hints carefully.
+  timeLimitSeconds: 75
+  startingScore: 0
+  correctConnectionScore: 15
+  incorrectConnectionPenalty: 5
+  completionBonus: 75
+  availableHints: 2
+  showStarLabels: 1
+  showGuideLines: 0
+  highlightNextValidStar: 0
+  allowConnectionUndo: 1
+  allowClearAll: 1
+  randomizeStartingStar: 0

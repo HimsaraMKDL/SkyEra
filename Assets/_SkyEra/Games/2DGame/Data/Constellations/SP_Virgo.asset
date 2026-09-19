@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e42d186219764a846466c53d077e4, type: 3}
+  m_Name: SP_Virgo
+  m_EditorClassIdentifier: 
+  patternId: CON_06
+  displayName: Virgo
+  educationalDescription: Virgo, the Maiden, contains bright Spica, a close stellar
+    system and the constellation's brightest star.
+  stars:
+  - starId: VIR_01
+    displayName: Spica
+    normalizedPosition: {x: 0.5, y: 0.18}
+    importantStar: 1
+  - starId: VIR_02
+    displayName: Porrima
+    normalizedPosition: {x: 0.48, y: 0.5}
+    importantStar: 1
+  - starId: VIR_03
+    displayName: Vindemiatrix
+    normalizedPosition: {x: 0.78, y: 0.72}
+    importantStar: 1
+  - starId: VIR_04
+    displayName: Zavijava
+    normalizedPosition: {x: 0.2, y: 0.58}
+    importantStar: 1
+  - starId: VIR_05
+    displayName: Heze
+    normalizedPosition: {x: 0.36, y: 0.33}
+    importantStar: 1
+  - starId: VIR_06
+    displayName: Virgo Star 6
+    normalizedPosition: {x: 0.62, y: 0.61}
+    importantStar: 0
+  - starId: VIR_07
+    displayName: Virgo Star 7
+    normalizedPosition: {x: 0.23, y: 0.36}
+    importantStar: 0
+  connections:
+  - fromStarId: VIR_04
+    toStarId: VIR_02
+  - fromStarId: VIR_02
+    toStarId: VIR_06
+  - fromStarId: VIR_06
+    toStarId: VIR_03
+  - fromStarId: VIR_02
+    toStarId: VIR_07
+  - fromStarId: VIR_07
+    toStarId: VIR_05
+  - fromStarId: VIR_05
+    toStarId: VIR_01

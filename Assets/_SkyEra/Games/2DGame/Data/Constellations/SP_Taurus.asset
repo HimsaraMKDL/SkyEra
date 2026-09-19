@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e42d186219764a846466c53d077e4, type: 3}
+  m_Name: SP_Taurus
+  m_EditorClassIdentifier: 
+  patternId: CON_02
+  displayName: Taurus
+  educationalDescription: Taurus, the Bull, contains the famous Hyades and Pleiades
+    star clusters, and Aldebaran makes its V-shaped face easy to recognize.
+  stars:
+  - starId: TAU_01
+    displayName: Aldebaran
+    normalizedPosition: {x: 0.5, y: 0.48}
+    importantStar: 1
+  - starId: TAU_02
+    displayName: Elnath
+    normalizedPosition: {x: 0.78, y: 0.82}
+    importantStar: 1
+  - starId: TAU_03
+    displayName: Pleiades Region
+    normalizedPosition: {x: 0.18, y: 0.84}
+    importantStar: 1
+  - starId: TAU_04
+    displayName: Taurus Star 4
+    normalizedPosition: {x: 0.36, y: 0.62}
+    importantStar: 0
+  - starId: TAU_05
+    displayName: Taurus Star 5
+    normalizedPosition: {x: 0.62, y: 0.64}
+    importantStar: 0
+  - starId: TAU_06
+    displayName: Taurus Star 6
+    normalizedPosition: {x: 0.3, y: 0.34}
+    importantStar: 0
+  - starId: TAU_07
+    displayName: Taurus Star 7
+    normalizedPosition: {x: 0.7, y: 0.32}
+    importantStar: 0
+  connections:
+  - fromStarId: TAU_03
+    toStarId: TAU_04
+  - fromStarId: TAU_04
+    toStarId: TAU_01
+  - fromStarId: TAU_02
+    toStarId: TAU_05
+  - fromStarId: TAU_05
+    toStarId: TAU_01
+  - fromStarId: TAU_01
+    toStarId: TAU_06
+  - fromStarId: TAU_01
+    toStarId: TAU_07

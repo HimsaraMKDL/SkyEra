@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e42d186219764a846466c53d077e4, type: 3}
+  m_Name: SP_Scorpius
+  m_EditorClassIdentifier: 
+  patternId: CON_08
+  displayName: Scorpius
+  educationalDescription: Scorpius, the Scorpion, forms a long curved pattern with
+    bright reddish Antares near its heart.
+  stars:
+  - starId: SCO_01
+    displayName: Dschubba
+    normalizedPosition: {x: 0.26, y: 0.82}
+    importantStar: 1
+  - starId: SCO_02
+    displayName: Acrab
+    normalizedPosition: {x: 0.43, y: 0.86}
+    importantStar: 1
+  - starId: SCO_03
+    displayName: Antares
+    normalizedPosition: {x: 0.46, y: 0.67}
+    importantStar: 1
+  - starId: SCO_04
+    displayName: Scorpius Star 4
+    normalizedPosition: {x: 0.5, y: 0.51}
+    importantStar: 0
+  - starId: SCO_05
+    displayName: Scorpius Star 5
+    normalizedPosition: {x: 0.55, y: 0.36}
+    importantStar: 0
+  - starId: SCO_06
+    displayName: Sargas
+    normalizedPosition: {x: 0.63, y: 0.23}
+    importantStar: 1
+  - starId: SCO_07
+    displayName: Scorpius Star 7
+    normalizedPosition: {x: 0.75, y: 0.18}
+    importantStar: 0
+  - starId: SCO_08
+    displayName: Shaula
+    normalizedPosition: {x: 0.84, y: 0.29}
+    importantStar: 1
+  - starId: SCO_09
+    displayName: Lesath
+    normalizedPosition: {x: 0.8, y: 0.41}
+    importantStar: 1
+  connections:
+  - fromStarId: SCO_01
+    toStarId: SCO_03
+  - fromStarId: SCO_02
+    toStarId: SCO_03
+  - fromStarId: SCO_03
+    toStarId: SCO_04
+  - fromStarId: SCO_04
+    toStarId: SCO_05
+  - fromStarId: SCO_05
+    toStarId: SCO_06
+  - fromStarId: SCO_06
+    toStarId: SCO_07
+  - fromStarId: SCO_07
+    toStarId: SCO_08
+  - fromStarId: SCO_08
+    toStarId: SCO_09

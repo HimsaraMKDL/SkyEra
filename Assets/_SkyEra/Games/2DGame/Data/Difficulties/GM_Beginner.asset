@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2826d9dc865466d4ea1e8f2f1339b61e, type: 3}
+  m_Name: GM_Beginner
+  m_EditorClassIdentifier: 
+  modeId: beginner
+  displayName: Beginner
+  instructions: Connect the stars to complete the correct star pattern. Use the guides
+    and hints if you need help.
+  timeLimitSeconds: 90
+  startingScore: 0
+  correctConnectionScore: 10
+  incorrectConnectionPenalty: 0
+  completionBonus: 50
+  availableHints: 3
+  showStarLabels: 1
+  showGuideLines: 1
+  highlightNextValidStar: 1
+  allowConnectionUndo: 1
+  allowClearAll: 1
+  randomizeStartingStar: 0

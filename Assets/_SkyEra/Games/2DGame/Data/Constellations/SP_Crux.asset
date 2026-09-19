@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e42d186219764a846466c53d077e4, type: 3}
+  m_Name: SP_Crux
+  m_EditorClassIdentifier: 
+  patternId: CON_07
+  displayName: Crux
+  educationalDescription: Crux, the Southern Cross, is formed by four prominent stars
+    that create its famous cross-shaped pattern.
+  stars:
+  - starId: CRU_01
+    displayName: Gacrux
+    normalizedPosition: {x: 0.5, y: 0.84}
+    importantStar: 1
+  - starId: CRU_02
+    displayName: Acrux
+    normalizedPosition: {x: 0.5, y: 0.16}
+    importantStar: 1
+  - starId: CRU_03
+    displayName: Mimosa
+    normalizedPosition: {x: 0.28, y: 0.52}
+    importantStar: 1
+  - starId: CRU_04
+    displayName: Delta Crucis
+    normalizedPosition: {x: 0.72, y: 0.52}
+    importantStar: 1
+  connections:
+  - fromStarId: CRU_01
+    toStarId: CRU_02
+  - fromStarId: CRU_03
+    toStarId: CRU_04
