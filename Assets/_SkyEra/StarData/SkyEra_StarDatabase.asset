@@ -705,3 +705,101 @@ MonoBehaviour:
       azimuth: 0
       magnitude: 3.87
       size: 1
+    - starName: Acrab
+      rightAscension: 16.0906
+      declination: -19.8055
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.62
+      size: 1
+    - starName: Jabbah
+      rightAscension: 16.2388
+      declination: -19.4607
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.9
+      size: 1
+    - starName: Pi Scorpii
+      rightAscension: 15.9809
+      declination: -26.1141
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.89
+      size: 1
+    - starName: Tau Scorpii
+      rightAscension: 16.598
+      declination: -28.216
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.82
+      size: 1
+    - starName: Epsilon Scorpii
+      rightAscension: 16.8361
+      declination: -34.2932
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.29
+      size: 1
+    - starName: Kappa Scorpii
+      rightAscension: 17.70813
+      declination: -39.02992
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.39
+      size: 1
+    - starName: Iota1 Scorpii
+      rightAscension: 17.79308
+      declination: -40.12699
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.03
+      size: 1
+    - starName: Eta Scorpii
+      rightAscension: 17.2026
+      declination: -43.2392
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.33
+      size: 1
+    - starName: Zeta1 Scorpii
+      rightAscension: 16.89993
+      declination: -42.36203
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.7
+      size: 1
+    - starName: Mu1 Scorpii
+      rightAscension: 16.86451
+      declination: -38.04733
+      altitude: 0
+      azimuth: 0
+      magnitude: 3
+      size: 1
+    - starName: Phi Sagittarii
+      rightAscension: 18.76094
+      declination: -26.99078
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.17
+      size: 1
+    - starName: Tau Sagittarii
+      rightAscension: 19.11567
+      declination: -27.67028
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.33
+      size: 1
+    - starName: Alnasl
+      rightAscension: 18.09681
+      declination: -30.42397
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.99
+      size: 1
+    - starName: Eta Sagittarii
+      rightAscension: 18.29379
+      declination: -36.76161
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.11
+      size: 1

@@ -15,12 +15,20 @@ MonoBehaviour:
   constellationName: Scorpius
   eraIndex: 2
   starNames:
-  - Dschubba
-  - Antares
-  - Sargas
   - Shaula
-  - Lesath
-  connectionStart: 00000000010000000200000003000000
-  connectionEnd: 01000000020000000300000004000000
+  - Kappa Scorpii
+  - Iota1 Scorpii
+  - Sargas
+  - Zeta1 Scorpii
+  - Epsilon Scorpii
+  - Mu1 Scorpii
+  - Epsilon Scorpii
+  - Tau Scorpii
+  - Antares
+  - Dschubba
+  - Pi Scorpii
+  - Acrab
+  connectionStart: 000000000100000002000000030000000400000005000000060000000700000008000000090000000900000009000000
+  connectionEnd: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
   lineColor: {r: 1, g: 1, b: 1, a: 1}
   lineWidth: 1.5

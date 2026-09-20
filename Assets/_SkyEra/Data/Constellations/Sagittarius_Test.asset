@@ -15,12 +15,16 @@ MonoBehaviour:
   constellationName: Sagittarius
   eraIndex: 2
   starNames:
-  - Kaus Borealis
-  - Kaus Media
-  - Kaus Australis
+  - Tau Sagittarii
+  - Phi Sagittarii
   - Ascella
+  - Kaus Media
+  - Kaus Borealis
   - Nunki
-  connectionStart: 0000000001000000020000000300000004000000
-  connectionEnd: 0100000002000000030000000400000000000000
+  - Kaus Australis
+  - Alnasl
+  - Eta Sagittarii
+  connectionStart: 000000000000000001000000020000000200000003000000030000000400000005000000050000000600000006000000
+  connectionEnd: 010000000200000003000000030000000400000005000000060000000600000007000000070000000800000008000000
   lineColor: {r: 1, g: 1, b: 1, a: 1}
   lineWidth: 1.5
