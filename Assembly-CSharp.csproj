@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\_SkyEra\Scripts\Core\ScreenManager.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Input.cs" />
+    <Compile Include="Assets\_SkyEra\Scripts\Sky\SkyBackgroundController.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Tasks.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Sky\StarDataset.cs" />
     <Compile Include="Assets\_SkyEra\Scripts\Era\EraManager.cs" />

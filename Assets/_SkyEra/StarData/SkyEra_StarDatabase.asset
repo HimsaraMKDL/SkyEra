@@ -537,3 +537,171 @@ MonoBehaviour:
       azimuth: 0
       magnitude: 3.6
       size: 1
+    - starName: Aludra
+      rightAscension: 7.40158
+      declination: -29.3031
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.46
+      size: 1
+    - starName: Muliphein
+      rightAscension: 7.06264
+      declination: -15.6333
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.09
+      size: 1
+    - starName: Theta CMa
+      rightAscension: 6.90317
+      declination: -12.03861
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.07
+      size: 1
+    - starName: Omega CMa
+      rightAscension: 7.24686
+      declination: -26.77278
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.85
+      size: 1
+    - starName: Iota CMa
+      rightAscension: 6.93561
+      declination: -17.05417
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.37
+      size: 1
+    - starName: Omicron2 CMa
+      rightAscension: 7.05042
+      declination: -23.83333
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.02
+      size: 1
+    - starName: Sigma CMa
+      rightAscension: 7.02864
+      declination: -27.93472
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.47
+      size: 1
+    - starName: ' Omicron1 CMa'
+      rightAscension: 6.90219
+      declination: -24.18389
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.87
+      size: 1
+    - starName: Nu2 CMa
+      rightAscension: 6.61139
+      declination: -19.25583
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.95
+      size: 1
+    - starName: Xi2 CMa
+      rightAscension: 6.58428
+      declination: -22.96472
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.54
+      size: 1
+    - starName: Furud
+      rightAscension: 6.33856
+      declination: -30.06333
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.02
+      size: 1
+    - starName: Adhafera
+      rightAscension: 10.27817
+      declination: 23.41733
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.43
+      size: 1
+    - starName: Algenubi
+      rightAscension: 9.76419
+      declination: 23.77428
+      altitude: 0
+      azimuth: 0
+      magnitude: 2.97
+      size: 1
+    - starName: Al Jabhah
+      rightAscension: 10.12221
+      declination: 16.76267
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.48
+      size: 1
+    - starName: Auva
+      rightAscension: 12.9267
+      declination: 3.3975
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.39
+      size: 1
+    - starName: Zavijah
+      rightAscension: 11.8449
+      declination: 1.7647
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.59
+      size: 1
+    - starName: Omicron Vir
+      rightAscension: 12.0868
+      declination: 8.733
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.12
+      size: 1
+    - starName: Nu Vir
+      rightAscension: 11.7643
+      declination: 6.5294
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.04
+      size: 1
+    - starName: Theta Vir
+      rightAscension: 13.1658
+      declination: -5.539
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.38
+      size: 1
+    - starName: Chi Vir
+      rightAscension: 12.6541
+      declination: -7.9956
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.66
+      size: 1
+    - starName: Tau Vir
+      rightAscension: 14.02744
+      declination: 1.54458
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.23
+      size: 1
+    - starName: 109 Vir
+      rightAscension: 14.77083
+      declination: 1.89294
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.73
+      size: 1
+    - starName: Syrma
+      rightAscension: 14.2669
+      declination: -6.0005
+      altitude: 0
+      azimuth: 0
+      magnitude: 4.07
+      size: 1
+    - starName: Mu Vir
+      rightAscension: 14.7177
+      declination: -5.6582
+      altitude: 0
+      azimuth: 0
+      magnitude: 3.87
+      size: 1
