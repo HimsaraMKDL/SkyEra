@@ -21,15 +21,15 @@ MonoBehaviour:
     normalizedPosition: {x: 0.28, y: 0.8}
     importantStar: 1
   - starId: ORI_02
-    displayName: Belt Star 1
+    displayName: Alnitak
     normalizedPosition: {x: 0.4, y: 0.53}
     importantStar: 1
   - starId: ORI_03
-    displayName: Belt Star 2
+    displayName: Alnilam
     normalizedPosition: {x: 0.5, y: 0.5}
     importantStar: 1
   - starId: ORI_04
-    displayName: Belt Star 3
+    displayName: Mintaka
     normalizedPosition: {x: 0.6, y: 0.47}
     importantStar: 1
   - starId: ORI_05
@@ -37,11 +37,11 @@ MonoBehaviour:
     normalizedPosition: {x: 0.72, y: 0.14}
     importantStar: 1
   - starId: ORI_06
-    displayName: Orion Star 6
+    displayName: Bellatrix
     normalizedPosition: {x: 0.68, y: 0.76}
     importantStar: 1
   - starId: ORI_07
-    displayName: Orion Star 7
+    displayName: Saiph
     normalizedPosition: {x: 0.3, y: 0.18}
     importantStar: 1
   connections:
