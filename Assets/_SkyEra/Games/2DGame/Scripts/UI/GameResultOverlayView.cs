@@ -16,6 +16,9 @@ namespace SkyEra.Games.TwoDGame.UI
         private GameSessionBootstrap sessionBootstrap;
 
         [SerializeField]
+        private GameSessionProgressionController progressionController;
+
+        [SerializeField]
         private StarConnectionGameController connectionController;
 
         [SerializeField]
@@ -46,6 +49,9 @@ namespace SkyEra.Games.TwoDGame.UI
         [SerializeField]
         private Button retryButton;
 
+        [SerializeField]
+        private Button continueButton;
+
         [Header("Result Icons")]
         [SerializeField]
         private Sprite completionIcon;
@@ -61,6 +67,15 @@ namespace SkyEra.Games.TwoDGame.UI
         [SerializeField]
         private Color successTitleColor =
             new Color(0.45f, 1.00f, 0.75f, 1.00f);
+
+        [Header("Final Beginner Completion")]
+        [SerializeField]
+        private string sequenceCompleteTitle =
+            "Beginner Level Complete!";
+
+        [SerializeField]
+        private string sequenceCompleteMessage =
+            "You completed all Beginner constellations!";
 
         [Header("Timeout Content")]
         [SerializeField]
@@ -144,27 +159,38 @@ namespace SkyEra.Games.TwoDGame.UI
 
         private void SubscribeToButtons()
         {
-            if (retryButton == null)
+            if (retryButton != null)
             {
-                return;
+                retryButton.onClick.RemoveListener(
+                    HandleRetryClicked);
+
+                retryButton.onClick.AddListener(
+                    HandleRetryClicked);
             }
 
-            retryButton.onClick.RemoveListener(
-                HandleRetryClicked);
+            if (continueButton != null)
+            {
+                continueButton.onClick.RemoveListener(
+                    HandleContinueClicked);
 
-            retryButton.onClick.AddListener(
-                HandleRetryClicked);
+                continueButton.onClick.AddListener(
+                    HandleContinueClicked);
+            }
         }
 
         private void UnsubscribeFromButtons()
         {
-            if (retryButton == null)
+            if (retryButton != null)
             {
-                return;
+                retryButton.onClick.RemoveListener(
+                    HandleRetryClicked);
             }
 
-            retryButton.onClick.RemoveListener(
-                HandleRetryClicked);
+            if (continueButton != null)
+            {
+                continueButton.onClick.RemoveListener(
+                    HandleContinueClicked);
+            }
         }
 
         private void HandleSessionLoaded(
@@ -195,16 +221,45 @@ namespace SkyEra.Games.TwoDGame.UI
                 return;
             }
 
-            if (retryButton != null)
-            {
-                retryButton.interactable = false;
-            }
+            DisableActionButtons();
 
             Debug.Log(
                 "[GameResultOverlayView] Retrying current session.",
                 this);
 
             sessionBootstrap.ReloadCurrentSession();
+        }
+
+        private void HandleContinueClicked()
+        {
+            if (progressionController == null)
+            {
+                Debug.LogError(
+                    "[GameResultOverlayView] Cannot continue because " +
+                    "Progression Controller is not assigned.",
+                    this);
+
+                return;
+            }
+
+            if (!progressionController.HasNextSession)
+            {
+                Debug.Log(
+                    "[GameResultOverlayView] No next progression " +
+                    "session is available.",
+                    this);
+
+                return;
+            }
+
+            DisableActionButtons();
+
+            Debug.Log(
+                $"[GameResultOverlayView] Continuing to " +
+                $"'{progressionController.NextSession.DisplayName}'.",
+                this);
+
+            progressionController.LoadNextSession();
         }
 
         private void QueueResultDisplay(
@@ -224,8 +279,6 @@ namespace SkyEra.Games.TwoDGame.UI
         private IEnumerator ShowResultNextFrame(
             bool completedSuccessfully)
         {
-            // Wait one frame so score and timer controllers can
-            // finish processing the same gameplay event first.
             yield return null;
 
             if (completedSuccessfully)
@@ -245,6 +298,15 @@ namespace SkyEra.Games.TwoDGame.UI
             string patternName =
                 GetCurrentPatternName();
 
+            bool hasNextSession =
+                progressionController != null &&
+                progressionController.HasNextSession;
+
+            bool sequenceCompleted =
+                progressionController != null &&
+                progressionController.HasValidCurrentSession &&
+                !progressionController.HasNextSession;
+
             if (resultIcon != null)
             {
                 resultIcon.sprite = completionIcon;
@@ -254,7 +316,11 @@ namespace SkyEra.Games.TwoDGame.UI
 
             if (titleText != null)
             {
-                titleText.text = successTitle;
+                titleText.text =
+                    sequenceCompleted
+                        ? sequenceCompleteTitle
+                        : successTitle;
+
                 titleText.color =
                     successTitleColor;
             }
@@ -262,13 +328,27 @@ namespace SkyEra.Games.TwoDGame.UI
             if (messageText != null)
             {
                 messageText.text =
-                    $"{patternName} traced successfully!";
+                    sequenceCompleted
+                        ? sequenceCompleteMessage
+                        : $"{patternName} traced successfully!";
             }
 
             RefreshScoreText();
             RefreshTimeText(true);
 
             SetVisible(true);
+
+            ConfigureActionButtons(
+                showRetry: true,
+                showContinue: hasNextSession);
+
+            if (sequenceCompleted)
+            {
+                Debug.Log(
+                    "[GameResultOverlayView] Beginner session " +
+                    "sequence completed.",
+                    this);
+            }
         }
 
         private void ShowTimeoutResult()
@@ -278,8 +358,7 @@ namespace SkyEra.Games.TwoDGame.UI
 
             int completedConnections =
                 connectionController != null
-                    ? connectionController
-                        .CompletedConnectionCount
+                    ? connectionController.CompletedConnectionCount
                     : 0;
 
             int totalConnections =
@@ -311,6 +390,46 @@ namespace SkyEra.Games.TwoDGame.UI
             RefreshTimeText(false);
 
             SetVisible(true);
+
+            ConfigureActionButtons(
+                showRetry: true,
+                showContinue: false);
+        }
+
+        private void ConfigureActionButtons(
+            bool showRetry,
+            bool showContinue)
+        {
+            if (retryButton != null)
+            {
+                retryButton.gameObject.SetActive(
+                    showRetry);
+
+                retryButton.interactable =
+                    showRetry;
+            }
+
+            if (continueButton != null)
+            {
+                continueButton.gameObject.SetActive(
+                    showContinue);
+
+                continueButton.interactable =
+                    showContinue;
+            }
+        }
+
+        private void DisableActionButtons()
+        {
+            if (retryButton != null)
+            {
+                retryButton.interactable = false;
+            }
+
+            if (continueButton != null)
+            {
+                continueButton.interactable = false;
+            }
         }
 
         private void RefreshScoreText()
@@ -417,30 +536,31 @@ namespace SkyEra.Games.TwoDGame.UI
             canvasGroup.alpha =
                 visible ? 1f : 0f;
 
-            canvasGroup.interactable = visible;
-            canvasGroup.blocksRaycasts = visible;
+            canvasGroup.interactable =
+                visible;
 
-            if (retryButton != null)
-            {
-                retryButton.interactable = visible;
-            }
+            canvasGroup.blocksRaycasts =
+                visible;
         }
 
         public void HideImmediately()
         {
-            if (canvasGroup == null)
+            if (showCoroutine != null)
             {
-                return;
+                StopCoroutine(showCoroutine);
+                showCoroutine = null;
             }
 
-            canvasGroup.alpha = 0f;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-
-            if (retryButton != null)
+            if (canvasGroup != null)
             {
-                retryButton.interactable = false;
+                canvasGroup.alpha = 0f;
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
             }
+
+            ConfigureActionButtons(
+                showRetry: false,
+                showContinue: false);
         }
 
 #if UNITY_EDITOR

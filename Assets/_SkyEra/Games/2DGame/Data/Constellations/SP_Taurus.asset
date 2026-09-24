@@ -19,42 +19,42 @@ MonoBehaviour:
   stars:
   - starId: TAU_01
     displayName: Aldebaran
-    normalizedPosition: {x: 0.5, y: 0.48}
+    normalizedPosition: {x: 0.57, y: 0.43}
     importantStar: 1
   - starId: TAU_02
     displayName: Elnath
-    normalizedPosition: {x: 0.78, y: 0.82}
+    normalizedPosition: {x: 0.84, y: 0.48}
     importantStar: 1
   - starId: TAU_03
     displayName: Pleiades Region
-    normalizedPosition: {x: 0.18, y: 0.84}
+    normalizedPosition: {x: 0.16, y: 0.8}
     importantStar: 1
   - starId: TAU_04
     displayName: Taurus Star 4
-    normalizedPosition: {x: 0.36, y: 0.62}
+    normalizedPosition: {x: 0.38, y: 0.64}
     importantStar: 0
   - starId: TAU_05
     displayName: Taurus Star 5
-    normalizedPosition: {x: 0.62, y: 0.64}
+    normalizedPosition: {x: 0.45, y: 0.52}
     importantStar: 0
   - starId: TAU_06
     displayName: Taurus Star 6
-    normalizedPosition: {x: 0.3, y: 0.34}
+    normalizedPosition: {x: 0.1, y: 0.49}
     importantStar: 0
   - starId: TAU_07
     displayName: Taurus Star 7
-    normalizedPosition: {x: 0.7, y: 0.32}
+    normalizedPosition: {x: 0.64, y: 0.24}
     importantStar: 0
   connections:
   - fromStarId: TAU_03
     toStarId: TAU_04
   - fromStarId: TAU_04
-    toStarId: TAU_01
-  - fromStarId: TAU_02
     toStarId: TAU_05
   - fromStarId: TAU_05
     toStarId: TAU_01
+  - fromStarId: TAU_06
+    toStarId: TAU_05
   - fromStarId: TAU_01
-    toStarId: TAU_06
+    toStarId: TAU_02
   - fromStarId: TAU_01
     toStarId: TAU_07
