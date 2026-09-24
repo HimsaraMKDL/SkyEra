@@ -9,6 +9,26 @@ namespace SkyEra.Games.TwoDGame.Gameplay
     [DisallowMultipleComponent]
     public class StarConnectionGameController : MonoBehaviour
     {
+        private sealed class CompletedConnectionRecord
+        {
+            public string ConnectionKey { get; }
+            public StarNodeView FromStar { get; }
+            public StarNodeView ToStar { get; }
+            public ConnectionLineView LineView { get; }
+
+            public CompletedConnectionRecord(
+                string connectionKey,
+                StarNodeView fromStar,
+                StarNodeView toStar,
+                ConnectionLineView lineView)
+            {
+                ConnectionKey = connectionKey;
+                FromStar = fromStar;
+                ToStar = toStar;
+                LineView = lineView;
+            }
+        }
+
         [Header("Runtime References")]
         [SerializeField] private RectTransform gameplayArea;
         [SerializeField] private StarPatternView starPatternView;
@@ -24,6 +44,10 @@ namespace SkyEra.Games.TwoDGame.Gameplay
 
         private readonly List<ConnectionLineView> playerConnectionLines =
             new List<ConnectionLineView>();
+
+        private readonly List<CompletedConnectionRecord>
+            completedConnectionHistory =
+                new List<CompletedConnectionRecord>();
 
         private readonly HashSet<string> completedConnectionKeys =
             new HashSet<string>(
@@ -42,8 +66,12 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         public event Action<StarNodeView, StarNodeView>
             InvalidConnectionAttempted;
 
+        public event Action<StarNodeView, StarNodeView>
+            PlayerConnectionUndone;
+
         public event Action PatternCompleted;
         public event Action GameplayTimedOut;
+        public event Action PlayerProgressCleared;
 
         public StarNodeView SelectedStar => selectedStar;
 
@@ -56,6 +84,15 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         public bool IsPatternCompleted => patternCompleted;
 
         public bool IsGameplayLocked => gameplayLocked;
+
+        public bool HasPlayerProgress =>
+            completedConnectionKeys.Count > 0 ||
+            selectedStar != null;
+
+        public bool CanUndoConnection =>
+            !gameplayLocked &&
+            !patternCompleted &&
+            completedConnectionHistory.Count > 0;
 
         private void OnEnable()
         {
@@ -167,11 +204,26 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                 return;
             }
 
-            CreatePlayerConnectionLine(
-                fromStar,
-                toStar);
+            ConnectionLineView lineView =
+                CreatePlayerConnectionLine(
+                    fromStar,
+                    toStar);
 
-            completedConnectionKeys.Add(connectionKey);
+            if (lineView == null)
+            {
+                ClearSelection();
+                return;
+            }
+
+            completedConnectionKeys.Add(
+                connectionKey);
+
+            completedConnectionHistory.Add(
+                new CompletedConnectionRecord(
+                    connectionKey,
+                    fromStar,
+                    toStar,
+                    lineView));
 
             ValidConnectionCreated?.Invoke(
                 fromStar,
@@ -186,7 +238,7 @@ namespace SkyEra.Games.TwoDGame.Gameplay
             SelectStar(toStar);
         }
 
-        private void CreatePlayerConnectionLine(
+        private ConnectionLineView CreatePlayerConnectionLine(
             StarNodeView fromStar,
             StarNodeView toStar)
         {
@@ -197,7 +249,7 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                     "Line Prefab is not assigned.",
                     this);
 
-                return;
+                return null;
             }
 
             if (gameplayArea == null)
@@ -207,7 +259,7 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                     "is not assigned.",
                     this);
 
-                return;
+                return null;
             }
 
             ConnectionLineView lineView =
@@ -228,16 +280,21 @@ namespace SkyEra.Games.TwoDGame.Gameplay
             lineView.SetColor(
                 playerConnectionColor);
 
-            PlacePlayerLineBehindStars(lineView);
+            PlacePlayerLineBehindStars(
+                lineView);
 
-            playerConnectionLines.Add(lineView);
+            playerConnectionLines.Add(
+                lineView);
+
+            return lineView;
         }
 
         private void PlacePlayerLineBehindStars(
             ConnectionLineView lineView)
         {
             if (lineView == null ||
-                starPatternView == null)
+                starPatternView == null ||
+                gameplayArea == null)
             {
                 return;
             }
@@ -276,7 +333,8 @@ namespace SkyEra.Games.TwoDGame.Gameplay
             selectedStar = star;
             selectedStar.SetSelected(true);
 
-            StarSelected?.Invoke(selectedStar);
+            StarSelected?.Invoke(
+                selectedStar);
         }
 
         private void ClearSelection()
@@ -359,12 +417,95 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                 this);
         }
 
+        public void UndoLastConnection()
+        {
+            if (gameplayLocked ||
+                patternCompleted)
+            {
+                return;
+            }
+
+            ClearSelection();
+
+            if (completedConnectionHistory.Count == 0)
+            {
+                return;
+            }
+
+            int lastIndex =
+                completedConnectionHistory.Count - 1;
+
+            CompletedConnectionRecord lastConnection =
+                completedConnectionHistory[lastIndex];
+
+            completedConnectionHistory.RemoveAt(
+                lastIndex);
+
+            completedConnectionKeys.Remove(
+                lastConnection.ConnectionKey);
+
+            if (lastConnection.LineView != null)
+            {
+                playerConnectionLines.Remove(
+                    lastConnection.LineView);
+
+                DestroyPlayerConnectionLine(
+                    lastConnection.LineView);
+            }
+
+            if (starPatternView != null)
+            {
+                starPatternView.ResetAllStarStates();
+                starPatternView.SetAllInteractions(true);
+            }
+
+            PlayerConnectionUndone?.Invoke(
+                lastConnection.FromStar,
+                lastConnection.ToStar);
+
+            Debug.Log(
+                $"[StarConnectionGameController] Undid connection " +
+                $"'{lastConnection.FromStar.StarId}' → " +
+                $"'{lastConnection.ToStar.StarId}'. " +
+                $"Remaining connections: " +
+                $"{completedConnectionKeys.Count}.",
+                this);
+        }
+
+        public void ClearAllPlayerProgress()
+        {
+            if (gameplayLocked ||
+                patternCompleted)
+            {
+                return;
+            }
+
+            ClearSelection();
+            ClearPlayerConnectionLines();
+
+            completedConnectionKeys.Clear();
+            completedConnectionHistory.Clear();
+
+            if (starPatternView != null)
+            {
+                starPatternView.ResetAllStarStates();
+                starPatternView.SetAllInteractions(true);
+            }
+
+            PlayerProgressCleared?.Invoke();
+
+            Debug.Log(
+                "[StarConnectionGameController] Player progress cleared.",
+                this);
+        }
+
         public void ResetGameplayState()
         {
             ClearSelection();
             ClearPlayerConnectionLines();
 
             completedConnectionKeys.Clear();
+            completedConnectionHistory.Clear();
 
             patternCompleted = false;
             gameplayLocked = false;
@@ -390,17 +531,31 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                     continue;
                 }
 
-                if (Application.isPlaying)
-                {
-                    Destroy(line.gameObject);
-                }
-                else
-                {
-                    DestroyImmediate(line.gameObject);
-                }
+                DestroyPlayerConnectionLine(
+                    line);
             }
 
             playerConnectionLines.Clear();
+        }
+
+        private static void DestroyPlayerConnectionLine(
+            ConnectionLineView line)
+        {
+            if (line == null)
+            {
+                return;
+            }
+
+            if (Application.isPlaying)
+            {
+                Destroy(
+                    line.gameObject);
+            }
+            else
+            {
+                DestroyImmediate(
+                    line.gameObject);
+            }
         }
 
         private static string CreateUndirectedConnectionKey(

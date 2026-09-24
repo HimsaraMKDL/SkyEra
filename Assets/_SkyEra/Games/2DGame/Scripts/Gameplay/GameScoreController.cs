@@ -35,8 +35,11 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         {
             if (sessionBootstrap != null)
             {
-                sessionBootstrap.SessionLoaded -= HandleSessionLoaded;
-                sessionBootstrap.SessionLoaded += HandleSessionLoaded;
+                sessionBootstrap.SessionLoaded -=
+                    HandleSessionLoaded;
+
+                sessionBootstrap.SessionLoaded +=
+                    HandleSessionLoaded;
             }
 
             if (connectionController != null)
@@ -58,6 +61,18 @@ namespace SkyEra.Games.TwoDGame.Gameplay
 
                 connectionController.PatternCompleted +=
                     HandlePatternCompleted;
+
+                connectionController.PlayerProgressCleared -=
+                    HandlePlayerProgressCleared;
+
+                connectionController.PlayerProgressCleared +=
+                    HandlePlayerProgressCleared;
+
+                connectionController.PlayerConnectionUndone -=
+                    HandlePlayerConnectionUndone;
+
+                connectionController.PlayerConnectionUndone +=
+                    HandlePlayerConnectionUndone;
             }
         }
 
@@ -65,7 +80,8 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         {
             if (sessionBootstrap != null)
             {
-                sessionBootstrap.SessionLoaded -= HandleSessionLoaded;
+                sessionBootstrap.SessionLoaded -=
+                    HandleSessionLoaded;
             }
 
             if (connectionController != null)
@@ -78,6 +94,12 @@ namespace SkyEra.Games.TwoDGame.Gameplay
 
                 connectionController.PatternCompleted -=
                     HandlePatternCompleted;
+
+                connectionController.PlayerProgressCleared -=
+                    HandlePlayerProgressCleared;
+
+                connectionController.PlayerConnectionUndone -=
+                    HandlePlayerConnectionUndone;
             }
         }
 
@@ -96,7 +118,9 @@ namespace SkyEra.Games.TwoDGame.Gameplay
             }
 
             currentMode = session.GameMode;
-            SetScore(currentMode.StartingScore);
+
+            SetScore(
+                currentMode.StartingScore);
 
             Debug.Log(
                 $"[GameScoreController] Score initialized to " +
@@ -140,15 +164,52 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                 return;
             }
 
-            SetScore(
+            int minimumScore =
                 Mathf.Max(
                     0,
+                    currentMode.StartingScore);
+
+            SetScore(
+                Mathf.Max(
+                    minimumScore,
                     currentScore - penalty));
 
             Debug.Log(
                 $"[GameScoreController] Incorrect connection " +
                 $"'{fromStar.StarId}' → '{toStar.StarId}'. " +
                 $"Penalty: {penalty}. Score: {currentScore}.",
+                this);
+        }
+
+        private void HandlePlayerConnectionUndone(
+            StarNodeView fromStar,
+            StarNodeView toStar)
+        {
+            if (currentMode == null)
+            {
+                return;
+            }
+
+            int connectionScore =
+                Mathf.Max(
+                    0,
+                    currentMode.CorrectConnectionScore);
+
+            int minimumScore =
+                Mathf.Max(
+                    0,
+                    currentMode.StartingScore);
+
+            SetScore(
+                Mathf.Max(
+                    minimumScore,
+                    currentScore - connectionScore));
+
+            Debug.Log(
+                $"[GameScoreController] Undo connection " +
+                $"'{fromStar.StarId}' → '{toStar.StarId}'. " +
+                $"Removed {connectionScore} points. " +
+                $"Score: {currentScore}.",
                 this);
         }
 
@@ -166,6 +227,16 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                 $"[GameScoreController] Completion bonus " +
                 $"+{currentMode.CompletionBonus}. " +
                 $"Final score: {currentScore}.",
+                this);
+        }
+
+        private void HandlePlayerProgressCleared()
+        {
+            ResetScore();
+
+            Debug.Log(
+                $"[GameScoreController] Score reset to " +
+                $"{currentScore} because player progress was cleared.",
                 this);
         }
 
@@ -195,7 +266,9 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         private void SetScore(int value)
         {
             currentScore =
-                Mathf.Max(0, value);
+                Mathf.Max(
+                    0,
+                    value);
 
             ScoreChanged?.Invoke(
                 currentScore);
