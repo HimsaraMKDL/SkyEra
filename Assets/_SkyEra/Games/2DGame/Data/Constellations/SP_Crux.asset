@@ -19,19 +19,19 @@ MonoBehaviour:
   stars:
   - starId: CRU_01
     displayName: Gacrux
-    normalizedPosition: {x: 0.5, y: 0.84}
+    normalizedPosition: {x: 0.46, y: 0.85}
     importantStar: 1
   - starId: CRU_02
     displayName: Acrux
-    normalizedPosition: {x: 0.5, y: 0.16}
+    normalizedPosition: {x: 0.57, y: 0.19}
     importantStar: 1
   - starId: CRU_03
     displayName: Mimosa
-    normalizedPosition: {x: 0.28, y: 0.52}
+    normalizedPosition: {x: 0.36, y: 0.51}
     importantStar: 1
   - starId: CRU_04
     displayName: Delta Crucis
-    normalizedPosition: {x: 0.72, y: 0.52}
+    normalizedPosition: {x: 0.61, y: 0.7}
     importantStar: 1
   connections:
   - fromStarId: CRU_01

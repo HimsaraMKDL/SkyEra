@@ -19,38 +19,76 @@ MonoBehaviour:
   stars:
   - starId: CMA_01
     displayName: Sirius
-    normalizedPosition: {x: 0.72, y: 0.5}
+    normalizedPosition: {x: 0.79, y: 0.7}
     importantStar: 1
   - starId: CMA_02
     displayName: Mirzam
-    normalizedPosition: {x: 0.68, y: 0.22}
-    importantStar: 1
+    normalizedPosition: {x: 0.7, y: 0.78}
+    importantStar: 0
   - starId: CMA_03
     displayName: Wezen
-    normalizedPosition: {x: 0.31, y: 0.69}
+    normalizedPosition: {x: 0.29, y: 0.56}
     importantStar: 1
   - starId: CMA_04
     displayName: Adhara
-    normalizedPosition: {x: 0.22, y: 0.56}
-    importantStar: 1
+    normalizedPosition: {x: 0.47, y: 0.52}
+    importantStar: 0
   - starId: CMA_05
     displayName: Aludra
-    normalizedPosition: {x: 0.43, y: 0.66}
-    importantStar: 1
+    normalizedPosition: {x: 0.07, y: 0.58}
+    importantStar: 0
   - starId: CMA_06
-    displayName: Canis Major Star 6
-    normalizedPosition: {x: 0.85, y: 0.67}
+    displayName: Furud
+    normalizedPosition: {x: 0.5, y: 0.08}
+    importantStar: 0
+  - starId: CMA_07
+    displayName: Canis Major Star 7
+    normalizedPosition: {x: 0.42, y: 0.61}
+    importantStar: 0
+  - starId: CMA_08
+    displayName: Canis Major Star 8
+    normalizedPosition: {x: 0.77, y: 0.53}
+    importantStar: 0
+  - starId: CMA_09
+    displayName: Canis Major Star 9
+    normalizedPosition: {x: 0.65, y: 0.4}
+    importantStar: 0
+  - starId: CMA_10
+    displayName: Canis Major Star 10
+    normalizedPosition: {x: 0.92, y: 0.47}
+    importantStar: 0
+  - starId: CMA_11
+    displayName: Canis Major Star 11
+    normalizedPosition: {x: 0.69, y: 0.9}
+    importantStar: 0
+  - starId: CMA_12
+    displayName: Canis Major Star 12
+    normalizedPosition: {x: 0.89, y: 0.94}
     importantStar: 0
   connections:
-  - fromStarId: CMA_04
+  - fromStarId: CMA_05
     toStarId: CMA_03
   - fromStarId: CMA_03
-    toStarId: CMA_05
-  - fromStarId: CMA_05
+    toStarId: CMA_07
+  - fromStarId: CMA_07
     toStarId: CMA_01
   - fromStarId: CMA_03
-    toStarId: CMA_01
+    toStarId: CMA_04
+  - fromStarId: CMA_04
+    toStarId: CMA_06
+  - fromStarId: CMA_04
+    toStarId: CMA_08
+  - fromStarId: CMA_01
+    toStarId: CMA_08
+  - fromStarId: CMA_08
+    toStarId: CMA_09
+  - fromStarId: CMA_08
+    toStarId: CMA_10
   - fromStarId: CMA_01
     toStarId: CMA_02
-  - fromStarId: CMA_01
-    toStarId: CMA_06
+  - fromStarId: CMA_02
+    toStarId: CMA_11
+  - fromStarId: CMA_11
+    toStarId: CMA_12
+  - fromStarId: CMA_02
+    toStarId: CMA_12

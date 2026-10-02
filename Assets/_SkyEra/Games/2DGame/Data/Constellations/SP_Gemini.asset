@@ -19,48 +19,84 @@ MonoBehaviour:
   stars:
   - starId: GEM_01
     displayName: Castor
-    normalizedPosition: {x: 0.36, y: 0.86}
+    normalizedPosition: {x: 0.16, y: 0.85}
     importantStar: 1
   - starId: GEM_02
     displayName: Pollux
-    normalizedPosition: {x: 0.64, y: 0.84}
+    normalizedPosition: {x: 0.14, y: 0.64}
     importantStar: 1
   - starId: GEM_03
     displayName: Mebsuta
-    normalizedPosition: {x: 0.38, y: 0.68}
+    normalizedPosition: {x: 0.36, y: 0.74}
     importantStar: 1
   - starId: GEM_04
     displayName: Wasat
-    normalizedPosition: {x: 0.36, y: 0.45}
+    normalizedPosition: {x: 0.36, y: 0.46}
     importantStar: 1
   - starId: GEM_05
     displayName: Alhena
-    normalizedPosition: {x: 0.61, y: 0.43}
+    normalizedPosition: {x: 0.54, y: 0.12}
     importantStar: 1
   - starId: GEM_06
     displayName: Gemini Star 6
-    normalizedPosition: {x: 0.31, y: 0.16}
+    normalizedPosition: {x: 0.18, y: 0.55}
     importantStar: 0
   - starId: GEM_07
     displayName: Gemini Star 7
-    normalizedPosition: {x: 0.66, y: 0.16}
+    normalizedPosition: {x: 0.56, y: 0.93}
     importantStar: 0
   - starId: GEM_08
     displayName: Gemini Star 8
-    normalizedPosition: {x: 0.58, y: 0.65}
+    normalizedPosition: {x: 0.64, y: 0.59}
+    importantStar: 0
+  - starId: GEM_09
+    displayName: Gemini Star 9
+    normalizedPosition: {x: 0.29, y: 0.63}
+    importantStar: 0
+  - starId: GEM_10
+    displayName: Gemini Star 10
+    normalizedPosition: {x: 0.35, y: 0.27}
+    importantStar: 0
+  - starId: GEM_11
+    displayName: Gemini Star 11
+    normalizedPosition: {x: 0.81, y: 0.49}
+    importantStar: 0
+  - starId: GEM_12
+    displayName: Gemini Star 12
+    normalizedPosition: {x: 0.95, y: 0.57}
+    importantStar: 0
+  - starId: GEM_13
+    displayName: Gemini Star 13
+    normalizedPosition: {x: 0.5, y: 0.37}
+    importantStar: 0
+  - starId: GEM_14
+    displayName: Gemini Star 14
+    normalizedPosition: {x: 0.63, y: 0.23}
     importantStar: 0
   connections:
   - fromStarId: GEM_01
     toStarId: GEM_03
   - fromStarId: GEM_03
-    toStarId: GEM_04
-  - fromStarId: GEM_04
-    toStarId: GEM_06
-  - fromStarId: GEM_02
-    toStarId: GEM_08
-  - fromStarId: GEM_08
-    toStarId: GEM_05
-  - fromStarId: GEM_05
     toStarId: GEM_07
   - fromStarId: GEM_03
     toStarId: GEM_08
+  - fromStarId: GEM_02
+    toStarId: GEM_09
+  - fromStarId: GEM_09
+    toStarId: GEM_06
+  - fromStarId: GEM_09
+    toStarId: GEM_03
+  - fromStarId: GEM_09
+    toStarId: GEM_04
+  - fromStarId: GEM_08
+    toStarId: GEM_11
+  - fromStarId: GEM_11
+    toStarId: GEM_12
+  - fromStarId: GEM_04
+    toStarId: GEM_10
+  - fromStarId: GEM_10
+    toStarId: GEM_05
+  - fromStarId: GEM_04
+    toStarId: GEM_13
+  - fromStarId: GEM_13
+    toStarId: GEM_14

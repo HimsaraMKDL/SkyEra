@@ -19,46 +19,58 @@ MonoBehaviour:
   stars:
   - starId: LEO_01
     displayName: Regulus
-    normalizedPosition: {x: 0.3, y: 0.25}
+    normalizedPosition: {x: 0.77, y: 0.3}
     importantStar: 1
   - starId: LEO_02
     displayName: Algieba
-    normalizedPosition: {x: 0.35, y: 0.5}
+    normalizedPosition: {x: 0.68, y: 0.55}
     importantStar: 1
   - starId: LEO_03
     displayName: Leo Star 3
-    normalizedPosition: {x: 0.29, y: 0.69}
+    normalizedPosition: {x: 0.7, y: 0.65}
     importantStar: 0
   - starId: LEO_04
     displayName: Leo Star 4
-    normalizedPosition: {x: 0.4, y: 0.82}
+    normalizedPosition: {x: 0.84, y: 0.75}
     importantStar: 0
   - starId: LEO_05
     displayName: Zosma
-    normalizedPosition: {x: 0.57, y: 0.56}
+    normalizedPosition: {x: 0.33, y: 0.56}
     importantStar: 1
   - starId: LEO_06
     displayName: Chertan
-    normalizedPosition: {x: 0.59, y: 0.34}
+    normalizedPosition: {x: 0.33, y: 0.41}
     importantStar: 1
   - starId: LEO_07
     displayName: Denebola
-    normalizedPosition: {x: 0.8, y: 0.47}
+    normalizedPosition: {x: 0.1, y: 0.39}
+    importantStar: 1
+  - starId: LEO_08
+    displayName: Leo Star 8
+    normalizedPosition: {x: 0.9, y: 0.68}
+    importantStar: 1
+  - starId: LEO_09
+    displayName: Leo Star 9
+    normalizedPosition: {x: 0.77, y: 0.46}
     importantStar: 1
   connections:
-  - fromStarId: LEO_04
-    toStarId: LEO_03
-  - fromStarId: LEO_03
-    toStarId: LEO_02
-  - fromStarId: LEO_02
-    toStarId: LEO_01
-  - fromStarId: LEO_02
+  - fromStarId: LEO_07
     toStarId: LEO_05
-  - fromStarId: LEO_01
+  - fromStarId: LEO_07
     toStarId: LEO_06
   - fromStarId: LEO_05
     toStarId: LEO_06
+  - fromStarId: LEO_05
+    toStarId: LEO_02
   - fromStarId: LEO_06
-    toStarId: LEO_07
-  - fromStarId: LEO_07
-    toStarId: LEO_05
+    toStarId: LEO_01
+  - fromStarId: LEO_02
+    toStarId: LEO_03
+  - fromStarId: LEO_03
+    toStarId: LEO_04
+  - fromStarId: LEO_04
+    toStarId: LEO_08
+  - fromStarId: LEO_02
+    toStarId: LEO_09
+  - fromStarId: LEO_09
+    toStarId: LEO_01

@@ -19,54 +19,102 @@ MonoBehaviour:
   stars:
   - starId: SCO_01
     displayName: Dschubba
-    normalizedPosition: {x: 0.26, y: 0.82}
+    normalizedPosition: {x: 0.63, y: 0.93}
     importantStar: 1
   - starId: SCO_02
     displayName: Acrab
-    normalizedPosition: {x: 0.43, y: 0.86}
+    normalizedPosition: {x: 0.68, y: 0.89}
     importantStar: 1
   - starId: SCO_03
     displayName: Antares
-    normalizedPosition: {x: 0.46, y: 0.67}
+    normalizedPosition: {x: 0.575, y: 0.71}
     importantStar: 1
   - starId: SCO_04
     displayName: Scorpius Star 4
-    normalizedPosition: {x: 0.5, y: 0.51}
+    normalizedPosition: {x: 0.545, y: 0.65}
     importantStar: 0
   - starId: SCO_05
     displayName: Scorpius Star 5
-    normalizedPosition: {x: 0.55, y: 0.36}
+    normalizedPosition: {x: 0.49, y: 0.48}
     importantStar: 0
   - starId: SCO_06
     displayName: Sargas
-    normalizedPosition: {x: 0.63, y: 0.23}
+    normalizedPosition: {x: 0.47, y: 0.24}
     importantStar: 1
   - starId: SCO_07
     displayName: Scorpius Star 7
-    normalizedPosition: {x: 0.75, y: 0.18}
+    normalizedPosition: {x: 0.34, y: 0.2}
     importantStar: 0
   - starId: SCO_08
     displayName: Shaula
-    normalizedPosition: {x: 0.84, y: 0.29}
+    normalizedPosition: {x: 0.355, y: 0.5}
     importantStar: 1
   - starId: SCO_09
     displayName: Lesath
-    normalizedPosition: {x: 0.8, y: 0.41}
+    normalizedPosition: {x: 0.415, y: 0.52}
+    importantStar: 1
+  - starId: SCO_10
+    displayName: Scorpius Star 10
+    normalizedPosition: {x: 0.73, y: 0.78}
+    importantStar: 1
+  - starId: SCO_11
+    displayName: Scorpius Star 11
+    normalizedPosition: {x: 0.72, y: 0.66}
+    importantStar: 1
+  - starId: SCO_12
+    displayName: Scorpius Star 12
+    normalizedPosition: {x: 0.72, y: 0.54}
+    importantStar: 1
+  - starId: SCO_13
+    displayName: Scorpius Star 13
+    normalizedPosition: {x: 0.625, y: 0.735}
+    importantStar: 1
+  - starId: SCO_14
+    displayName: Scorpius Star 14
+    normalizedPosition: {x: 0.48, y: 0.36}
+    importantStar: 1
+  - starId: SCO_15
+    displayName: Scorpius Star 15
+    normalizedPosition: {x: 0.41, y: 0.2}
+    importantStar: 1
+  - starId: SCO_16
+    displayName: Scorpius Star 16
+    normalizedPosition: {x: 0.3, y: 0.3}
+    importantStar: 1
+  - starId: SCO_17
+    displayName: Scorpius Star 17
+    normalizedPosition: {x: 0.315, y: 0.385}
     importantStar: 1
   connections:
   - fromStarId: SCO_01
-    toStarId: SCO_03
+    toStarId: SCO_02
   - fromStarId: SCO_02
+    toStarId: SCO_10
+  - fromStarId: SCO_10
+    toStarId: SCO_11
+  - fromStarId: SCO_11
+    toStarId: SCO_12
+  - fromStarId: SCO_10
+    toStarId: SCO_13
+  - fromStarId: SCO_13
     toStarId: SCO_03
   - fromStarId: SCO_03
     toStarId: SCO_04
   - fromStarId: SCO_04
     toStarId: SCO_05
   - fromStarId: SCO_05
+    toStarId: SCO_14
+  - fromStarId: SCO_14
     toStarId: SCO_06
   - fromStarId: SCO_06
+    toStarId: SCO_15
+  - fromStarId: SCO_15
     toStarId: SCO_07
   - fromStarId: SCO_07
+    toStarId: SCO_16
+  - fromStarId: SCO_16
+    toStarId: SCO_17
+  - fromStarId: SCO_17
     toStarId: SCO_08
   - fromStarId: SCO_08
     toStarId: SCO_09

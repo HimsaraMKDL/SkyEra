@@ -19,42 +19,68 @@ MonoBehaviour:
   stars:
   - starId: TAU_01
     displayName: Aldebaran
-    normalizedPosition: {x: 0.57, y: 0.43}
+    normalizedPosition: {x: 0.39, y: 0.49}
     importantStar: 1
   - starId: TAU_02
     displayName: Elnath
-    normalizedPosition: {x: 0.84, y: 0.48}
+    normalizedPosition: {x: 0.23, y: 0.89}
     importantStar: 1
   - starId: TAU_03
     displayName: Pleiades Region
-    normalizedPosition: {x: 0.16, y: 0.8}
+    normalizedPosition: {x: 0.85, y: 0.63}
     importantStar: 1
   - starId: TAU_04
     displayName: Taurus Star 4
-    normalizedPosition: {x: 0.38, y: 0.64}
+    normalizedPosition: {x: 0.45, y: 0.7}
     importantStar: 0
   - starId: TAU_05
     displayName: Taurus Star 5
-    normalizedPosition: {x: 0.45, y: 0.52}
+    normalizedPosition: {x: 0.52, y: 0.56}
     importantStar: 0
   - starId: TAU_06
     displayName: Taurus Star 6
-    normalizedPosition: {x: 0.1, y: 0.49}
+    normalizedPosition: {x: 0.08, y: 0.75}
     importantStar: 0
   - starId: TAU_07
     displayName: Taurus Star 7
-    normalizedPosition: {x: 0.64, y: 0.24}
+    normalizedPosition: {x: 0.69, y: 0.24}
+    importantStar: 0
+  - starId: TAU_08
+    displayName: Taurus Star 8
+    normalizedPosition: {x: 0.57, y: 0.47}
+    importantStar: 0
+  - starId: TAU_09
+    displayName: Taurus Star 9
+    normalizedPosition: {x: 0.46, y: 0.39}
+    importantStar: 0
+  - starId: TAU_10
+    displayName: Taurus Star 10
+    normalizedPosition: {x: 0.59, y: 0.32}
+    importantStar: 0
+  - starId: TAU_11
+    displayName: Taurus Star 11
+    normalizedPosition: {x: 0.89, y: 0.09}
     importantStar: 0
   connections:
-  - fromStarId: TAU_03
+  - fromStarId: TAU_02
     toStarId: TAU_04
   - fromStarId: TAU_04
     toStarId: TAU_05
   - fromStarId: TAU_05
-    toStarId: TAU_01
+    toStarId: TAU_08
+  - fromStarId: TAU_08
+    toStarId: TAU_03
   - fromStarId: TAU_06
+    toStarId: TAU_01
+  - fromStarId: TAU_01
     toStarId: TAU_05
   - fromStarId: TAU_01
-    toStarId: TAU_02
-  - fromStarId: TAU_01
+    toStarId: TAU_09
+  - fromStarId: TAU_09
+    toStarId: TAU_10
+  - fromStarId: TAU_10
     toStarId: TAU_07
+  - fromStarId: TAU_07
+    toStarId: TAU_11
+  - fromStarId: TAU_08
+    toStarId: TAU_10

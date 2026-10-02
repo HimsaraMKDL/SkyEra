@@ -19,42 +19,74 @@ MonoBehaviour:
   stars:
   - starId: VIR_01
     displayName: Spica
-    normalizedPosition: {x: 0.5, y: 0.18}
+    normalizedPosition: {x: 0.56, y: 0.3}
     importantStar: 1
   - starId: VIR_02
     displayName: Porrima
-    normalizedPosition: {x: 0.48, y: 0.5}
+    normalizedPosition: {x: 0.51, y: 0.7}
     importantStar: 1
   - starId: VIR_03
     displayName: Vindemiatrix
-    normalizedPosition: {x: 0.78, y: 0.72}
+    normalizedPosition: {x: 0.72, y: 0.94}
     importantStar: 1
   - starId: VIR_04
     displayName: Zavijava
-    normalizedPosition: {x: 0.2, y: 0.58}
+    normalizedPosition: {x: 0.2, y: 0.26}
     importantStar: 1
   - starId: VIR_05
     displayName: Heze
-    normalizedPosition: {x: 0.36, y: 0.33}
+    normalizedPosition: {x: 0.61, y: 0.66}
     importantStar: 1
   - starId: VIR_06
     displayName: Virgo Star 6
-    normalizedPosition: {x: 0.62, y: 0.61}
+    normalizedPosition: {x: 0.68, y: 0.79}
     importantStar: 0
   - starId: VIR_07
     displayName: Virgo Star 7
-    normalizedPosition: {x: 0.23, y: 0.36}
+    normalizedPosition: {x: 0.43, y: 0.47}
+    importantStar: 0
+  - starId: VIR_08
+    displayName: Virgo Star 8
+    normalizedPosition: {x: 0.44, y: 0.82}
+    importantStar: 0
+  - starId: VIR_09
+    displayName: Virgo Star 9
+    normalizedPosition: {x: 0.32, y: 0.41}
+    importantStar: 0
+  - starId: VIR_10
+    displayName: Virgo Star 10
+    normalizedPosition: {x: 0.45, y: 0.12}
+    importantStar: 0
+  - starId: VIR_11
+    displayName: Virgo Star 11
+    normalizedPosition: {x: 0.38, y: 0.22}
+    importantStar: 0
+  - starId: VIR_12
+    displayName: Virgo Star 12
+    normalizedPosition: {x: 0.31, y: 0.1}
     importantStar: 0
   connections:
   - fromStarId: VIR_04
-    toStarId: VIR_02
-  - fromStarId: VIR_02
-    toStarId: VIR_06
-  - fromStarId: VIR_06
-    toStarId: VIR_03
-  - fromStarId: VIR_02
+    toStarId: VIR_09
+  - fromStarId: VIR_09
     toStarId: VIR_07
   - fromStarId: VIR_07
+    toStarId: VIR_02
+  - fromStarId: VIR_02
     toStarId: VIR_05
   - fromStarId: VIR_05
     toStarId: VIR_01
+  - fromStarId: VIR_01
+    toStarId: VIR_07
+  - fromStarId: VIR_02
+    toStarId: VIR_08
+  - fromStarId: VIR_05
+    toStarId: VIR_06
+  - fromStarId: VIR_06
+    toStarId: VIR_03
+  - fromStarId: VIR_01
+    toStarId: VIR_10
+  - fromStarId: VIR_10
+    toStarId: VIR_11
+  - fromStarId: VIR_11
+    toStarId: VIR_12

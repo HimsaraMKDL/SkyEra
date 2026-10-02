@@ -19,35 +19,59 @@ MonoBehaviour:
   stars:
   - starId: CYG_01
     displayName: Deneb
-    normalizedPosition: {x: 0.5, y: 0.86}
+    normalizedPosition: {x: 0.495, y: 0.72}
     importantStar: 1
   - starId: CYG_02
     displayName: Sadr
-    normalizedPosition: {x: 0.5, y: 0.56}
+    normalizedPosition: {x: 0.55, y: 0.54}
     importantStar: 1
   - starId: CYG_03
     displayName: Albireo
-    normalizedPosition: {x: 0.5, y: 0.16}
+    normalizedPosition: {x: 0.75, y: 0.11}
     importantStar: 1
   - starId: CYG_04
     displayName: Gienah
-    normalizedPosition: {x: 0.22, y: 0.56}
+    normalizedPosition: {x: 0.44, y: 0.33}
     importantStar: 1
   - starId: CYG_05
     displayName: Delta Cygni
-    normalizedPosition: {x: 0.78, y: 0.56}
+    normalizedPosition: {x: 0.69, y: 0.68}
     importantStar: 1
   - starId: CYG_06
     displayName: Cygnus Star 6
-    normalizedPosition: {x: 0.5, y: 0.35}
+    normalizedPosition: {x: 0.64, y: 0.33}
+    importantStar: 0
+  - starId: CYG_07
+    displayName: Cygnus Star 7
+    normalizedPosition: {x: 0.315, y: 0.245}
+    importantStar: 0
+  - starId: CYG_08
+    displayName: Cygnus Star 8
+    normalizedPosition: {x: 0.173, y: 0.26}
+    importantStar: 0
+  - starId: CYG_09
+    displayName: Cygnus Star 9
+    normalizedPosition: {x: 0.74, y: 0.85}
+    importantStar: 0
+  - starId: CYG_10
+    displayName: Cygnus Star 10
+    normalizedPosition: {x: 0.78, y: 0.91}
     importantStar: 0
   connections:
   - fromStarId: CYG_01
     toStarId: CYG_02
   - fromStarId: CYG_02
     toStarId: CYG_04
+  - fromStarId: CYG_04
+    toStarId: CYG_07
+  - fromStarId: CYG_07
+    toStarId: CYG_08
   - fromStarId: CYG_02
     toStarId: CYG_05
+  - fromStarId: CYG_05
+    toStarId: CYG_09
+  - fromStarId: CYG_09
+    toStarId: CYG_10
   - fromStarId: CYG_02
     toStarId: CYG_06
   - fromStarId: CYG_06
