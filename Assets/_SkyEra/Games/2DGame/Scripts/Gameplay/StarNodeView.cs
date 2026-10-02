@@ -1,3 +1,4 @@
+
 using System;
 using TMPro;
 using UnityEngine;
@@ -20,17 +21,26 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         [SerializeField] private float importantScale = 1.15f;
         [SerializeField] private float selectedScale = 1.2f;
 
+        [Header("Label Settings")]
+        [SerializeField]
+        private bool hideGenericNumberedLabels = true;
+
         private StarNodeDefinition starDefinition;
         private bool selected;
         private bool interactable = true;
+        private bool labelVisibilityRequested;
 
         public event Action<StarNodeView> Clicked;
 
         public string StarId =>
-            starDefinition != null ? starDefinition.StarId : string.Empty;
+            starDefinition != null
+                ? starDefinition.StarId
+                : string.Empty;
 
         public string DisplayName =>
-            starDefinition != null ? starDefinition.DisplayName : string.Empty;
+            starDefinition != null
+                ? starDefinition.DisplayName
+                : string.Empty;
 
         public Vector2 NormalizedPosition =>
             starDefinition != null
@@ -38,7 +48,8 @@ namespace SkyEra.Games.TwoDGame.Gameplay
                 : new Vector2(0.5f, 0.5f);
 
         public bool ImportantStar =>
-            starDefinition != null && starDefinition.ImportantStar;
+            starDefinition != null &&
+            starDefinition.ImportantStar;
 
         public StarNodeDefinition Definition => starDefinition;
 
@@ -48,7 +59,8 @@ namespace SkyEra.Games.TwoDGame.Gameplay
             {
                 if (rectTransform == null)
                 {
-                    rectTransform = transform as RectTransform;
+                    rectTransform =
+                        transform as RectTransform;
                 }
 
                 return rectTransform;
@@ -65,8 +77,11 @@ namespace SkyEra.Games.TwoDGame.Gameplay
 
             if (button != null)
             {
-                button.onClick.RemoveListener(HandleButtonClicked);
-                button.onClick.AddListener(HandleButtonClicked);
+                button.onClick.RemoveListener(
+                    HandleButtonClicked);
+
+                button.onClick.AddListener(
+                    HandleButtonClicked);
             }
 
             RefreshVisualState();
@@ -76,7 +91,8 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         {
             if (button != null)
             {
-                button.onClick.RemoveListener(HandleButtonClicked);
+                button.onClick.RemoveListener(
+                    HandleButtonClicked);
             }
         }
 
@@ -89,17 +105,19 @@ namespace SkyEra.Games.TwoDGame.Gameplay
             selected = false;
             interactable = enableInteraction;
 
+            labelVisibilityRequested = showLabel;
+
             CacheReferences();
 
             if (labelText != null)
             {
-                labelText.text = definition != null
-                    ? definition.DisplayName
-                    : string.Empty;
-
-                labelText.gameObject.SetActive(showLabel);
+                labelText.text =
+                    definition != null
+                        ? definition.DisplayName
+                        : string.Empty;
             }
 
+            RefreshLabelVisibility();
             RefreshVisualState();
         }
 
@@ -117,17 +135,16 @@ namespace SkyEra.Games.TwoDGame.Gameplay
 
         public void SetLabelVisible(bool visible)
         {
-            if (labelText != null)
-            {
-                labelText.gameObject.SetActive(visible);
-            }
+            labelVisibilityRequested = visible;
+            RefreshLabelVisibility();
         }
 
         public void SetGlowVisible(bool visible)
         {
             if (glowImage != null)
             {
-                glowImage.gameObject.SetActive(visible);
+                glowImage.gameObject.SetActive(
+                    visible);
             }
         }
 
@@ -139,7 +156,8 @@ namespace SkyEra.Games.TwoDGame.Gameplay
 
         private void HandleButtonClicked()
         {
-            if (!interactable || starDefinition == null)
+            if (!interactable ||
+                starDefinition == null)
             {
                 return;
             }
@@ -147,34 +165,111 @@ namespace SkyEra.Games.TwoDGame.Gameplay
             Clicked?.Invoke(this);
         }
 
+        private void RefreshLabelVisibility()
+        {
+            if (labelText == null)
+            {
+                return;
+            }
+
+            bool hasLabel =
+                !string.IsNullOrWhiteSpace(
+                    labelText.text);
+
+            bool isGeneric =
+                starDefinition != null &&
+                IsGenericNumberedName(
+                    starDefinition.DisplayName);
+
+            bool shouldShow =
+                labelVisibilityRequested &&
+                hasLabel &&
+                !(hideGenericNumberedLabels &&
+                  isGeneric);
+
+            labelText.gameObject.SetActive(
+                shouldShow);
+        }
+
+        private static bool IsGenericNumberedName(
+            string displayName)
+        {
+            if (string.IsNullOrWhiteSpace(
+                    displayName))
+            {
+                return false;
+            }
+
+            string trimmedName =
+                displayName.Trim();
+
+            const string marker = " Star ";
+
+            int markerIndex =
+                trimmedName.LastIndexOf(
+                    marker,
+                    StringComparison.OrdinalIgnoreCase);
+
+            if (markerIndex <= 0)
+            {
+                return false;
+            }
+
+            int numberStart =
+                markerIndex + marker.Length;
+
+            if (numberStart >= trimmedName.Length)
+            {
+                return false;
+            }
+
+            string numberText =
+                trimmedName.Substring(
+                    numberStart);
+
+            return int.TryParse(
+                numberText,
+                out int starNumber) &&
+                starNumber > 0;
+        }
+
         private void RefreshVisualState()
         {
             if (button != null)
             {
-                button.interactable = interactable;
+                button.interactable =
+                    interactable;
             }
 
-            float targetScale = normalScale;
+            float targetScale =
+                normalScale;
 
-            if (starDefinition != null && starDefinition.ImportantStar)
+            if (starDefinition != null &&
+                starDefinition.ImportantStar)
             {
-                targetScale = importantScale;
+                targetScale =
+                    importantScale;
             }
 
             if (selected)
             {
-                targetScale = selectedScale;
+                targetScale =
+                    selectedScale;
             }
 
             if (RectTransform != null)
             {
                 RectTransform.localScale =
-                    new Vector3(targetScale, targetScale, 1f);
+                    new Vector3(
+                        targetScale,
+                        targetScale,
+                        1f);
             }
 
             if (glowImage != null)
             {
-                glowImage.gameObject.SetActive(selected);
+                glowImage.gameObject.SetActive(
+                    selected);
             }
 
             if (starImage != null)
@@ -197,26 +292,34 @@ namespace SkyEra.Games.TwoDGame.Gameplay
         {
             if (rectTransform == null)
             {
-                rectTransform = transform as RectTransform;
+                rectTransform =
+                    transform as RectTransform;
             }
 
             if (button == null)
             {
-                button = GetComponent<Button>();
+                button =
+                    GetComponent<Button>();
             }
 
             if (starImage == null)
             {
-                starImage = GetComponent<Image>();
+                starImage =
+                    GetComponent<Image>();
             }
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            normalScale = Mathf.Max(0.01f, normalScale);
-            importantScale = Mathf.Max(0.01f, importantScale);
-            selectedScale = Mathf.Max(0.01f, selectedScale);
+            normalScale =
+                Mathf.Max(0.01f, normalScale);
+
+            importantScale =
+                Mathf.Max(0.01f, importantScale);
+
+            selectedScale =
+                Mathf.Max(0.01f, selectedScale);
 
             CacheReferences();
         }
