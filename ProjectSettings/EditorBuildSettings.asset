@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_SkyEra/Scenes/01_Kiosk.unity
     guid: 2f35080a3ef4fc840860caa7ee69b867
+  - enabled: 1
+    path: Assets/_SkyEra/Games/2DGame/Scenes/02_2DGame.unity
+    guid: a620bc55deb0a7d41aae4bd1679739ab
   m_configObjects: {}
