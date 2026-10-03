@@ -1,3 +1,4 @@
+
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -51,6 +52,13 @@ namespace SkyEra.Games.TwoDGame.UI
 
         [SerializeField]
         private Button continueButton;
+
+        [Header("Action Button Layout")]
+        [SerializeField]
+        private float retryXWithContinue = -150f;
+
+        [SerializeField]
+        private float retryXWhenAlone = 0f;
 
         [Header("Result Icons")]
         [SerializeField]
@@ -255,7 +263,7 @@ namespace SkyEra.Games.TwoDGame.UI
             DisableActionButtons();
 
             Debug.Log(
-                $"[GameResultOverlayView] Continuing to " +
+                "[GameResultOverlayView] Continuing to " +
                 $"'{progressionController.NextSession.DisplayName}'.",
                 this);
 
@@ -310,6 +318,7 @@ namespace SkyEra.Games.TwoDGame.UI
             if (resultIcon != null)
             {
                 resultIcon.sprite = completionIcon;
+
                 resultIcon.enabled =
                     completionIcon != null;
             }
@@ -367,6 +376,7 @@ namespace SkyEra.Games.TwoDGame.UI
             if (resultIcon != null)
             {
                 resultIcon.sprite = timeoutIcon;
+
                 resultIcon.enabled =
                     timeoutIcon != null;
             }
@@ -374,6 +384,7 @@ namespace SkyEra.Games.TwoDGame.UI
             if (titleText != null)
             {
                 titleText.text = timeoutTitle;
+
                 titleText.color =
                     timeoutTitleColor;
             }
@@ -400,8 +411,24 @@ namespace SkyEra.Games.TwoDGame.UI
             bool showRetry,
             bool showContinue)
         {
+            bool continueAvailable =
+                showContinue &&
+                continueButton != null;
+
             if (retryButton != null)
             {
+                // Position Retry before showing the result.
+                // Preserve its existing Y position and size.
+                if (showRetry)
+                {
+                    float targetX =
+                        continueAvailable
+                            ? retryXWithContinue
+                            : retryXWhenAlone;
+
+                    SetRetryHorizontalPosition(targetX);
+                }
+
                 retryButton.gameObject.SetActive(
                     showRetry);
 
@@ -417,6 +444,31 @@ namespace SkyEra.Games.TwoDGame.UI
                 continueButton.interactable =
                     showContinue;
             }
+        }
+
+        private void SetRetryHorizontalPosition(
+            float targetX)
+        {
+            if (retryButton == null)
+            {
+                return;
+            }
+
+            RectTransform retryRect =
+                retryButton.transform as RectTransform;
+
+            if (retryRect == null)
+            {
+                return;
+            }
+
+            Vector2 position =
+                retryRect.anchoredPosition;
+
+            position.x = targetX;
+
+            retryRect.anchoredPosition =
+                position;
         }
 
         private void DisableActionButtons()
